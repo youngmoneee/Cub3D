@@ -9,7 +9,8 @@ MLXDIR	= mlxdir
 INC		= inc
 
 SRCD	= src
-SRCF	= main.c
+SRCF	= main.c \
+		  parse_1.c
 
 SRCS	= $(addprefix $(SRCD)/, $(SRCF))
 OBJS	= $(SRCS:.c=.o)
