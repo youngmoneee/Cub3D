@@ -39,7 +39,7 @@ typedef struct s_parse
 	t_map	map;
 }	t_parse;
 	
-int		max(int a, int b)
+static int	max(int a, int b)
 {
 	if (a > b)
 		return (a);
@@ -50,42 +50,47 @@ void	mkmap(t_parse *parse, int x, int y)
 {
 	char	buf;
 	int		is_read;
+	/* 
+	 * 생략 가능
+	 */
 	t_map	*map;
-
 	map = &parse->map;
+	//
 	is_read = read(parse->fd, &buf, 1);
 	map->width = max(map->width, x);
-	map->height = max(map->height, y + 1);
+	map->height = max(map->height, y);
 	if (is_read == FALSE)
 	{
-		map->map = (char **)malloc(sizeof(char *) * (y + 1));
+		map->map = (char **)malloc(sizeof(char *) * (map->height + 1));
 		if (map->map)
-			map->map[y] = 0;
+			map->map[map->height] = 0;
 		return ;
 	}
 	if (buf == '\n')
 	{
 		mkmap(parse, 0, y + 1);
-		map->map[y] = (char *)malloc(sizeof(char) * (map->width));
-		while (x < map->width - 1)
+		map->map[y] = (char *)malloc(sizeof(char) * (map->width + 1));
+		while (x < map->width)
 			map->map[y][x++] = ' ';
-		map->map[y][x] = 0;
+		map->map[y][map->width] = 0;
+		return ;
 	}
-	else
-	{
-		mkmap(parse, x + 1, y);
-		map->map[y][x] = buf;
-	}
+	mkmap(parse, x + 1, y);
+	map->map[y][x] = buf;
 }
 
-int main() {
+int main(int a, char** v) {
 	t_parse parse;
-	parse.map.width = 0;
-	parse.map.height = 0;
-	parse.fd = open("./test", O_RDONLY, 0777);
+	
+	parse.map.width = parse.map.height = 0;
+	parse.fd = open(v[1], O_RDONLY, 0777);
 	mkmap(&parse, 0, 0);
-	for (int i = 0; i < parse.map.height; i++) {
-		printf("%s\n", parse.map.map[i]);
+
+	for (int i = 0; parse.map.map[i]; i++) {
+		for (int j = 0; parse.map.map[i][j]; j++)
+			printf("[%c]", parse.map.map[i][j]);
+		printf("\n");
 	}
+	printf("x : %d y : %d\n", parse.map.width, parse.map.height);
 	return 0;
 }
