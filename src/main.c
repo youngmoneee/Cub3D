@@ -12,21 +12,40 @@
 
 #include "../inc/cub3d.h"
 #include <stdio.h>
+#include "../inc/util.h"
 
 int main(int a, char **v) {
 	t_parse parse;
 
 	if (a != 2)
 		exit(1);
-	parse.map.width = parse.map.height = 0;
-	parse.fd = open(v[1], O_RDONLY, 0777);
-	mkmap(&parse, 0, 0);
+	parsing(&parse, v[1]);
+	printf("floor parsed : %d floor valided : %d\n", parse.opt[FLOOR].parsed, parse.opt[FLOOR].valided);
+	if (parse.opt[FLOOR].parsed && parse.opt[FLOOR].valided)
+		printf("floor : %X\n", parse.opt[FLOOR].color);
+	printf("ceil parsed : %d ceil valided : %d\n", parse.opt[CEIL].parsed, parse.opt[CEIL].valided);
+	if (parse.opt[CEIL].parsed && parse.opt[CEIL].valided)
+		printf("ceil : %X\n", parse.opt[CEIL].color);
 
-	for (int i = 0; parse.map.map[i]; i++) {
-		for (int j = 0; parse.map.map[i][j]; j++)
-			printf("[%c]", parse.map.map[i][j]);
-		printf("\n");
-	}
-	printf("x : %d y : %d\n", parse.map.width, parse.map.height);
+	// news
+	for (int i = EAST; i < UNKNOWN; i++)
+		printf("fd => %d\n", parse.opt[i].fd);
+	char *qwe;
+	printf("WE parsed : %d WE valid : %d\n", parse.opt[WEST].parsed, parse.opt[WEST].valided);
+	if (parse.opt[WEST].parsed && parse.opt[WEST].valided)
+		printf("we : %s\n", qwe = gnl(parse.opt[WEST].fd, 0));
+	free(qwe);
+	printf("SO parsed : %d SO valid : %d\n", parse.opt[SOUTH].parsed, parse.opt[SOUTH].valided);
+	if (parse.opt[SOUTH].parsed && parse.opt[SOUTH].valided)
+		printf("so : %s\n", qwe = gnl(parse.opt[SOUTH].fd, 0));
+	free(qwe);
+	printf("NO parsed : %d NO valid : %d\n", parse.opt[NORTH].parsed, parse.opt[NORTH].valided);
+	if (parse.opt[NORTH].parsed && parse.opt[NORTH].valided)
+		printf("no : %s\n", qwe = gnl(parse.opt[NORTH].fd, 0));
+	free(qwe);
+	printf("EA parsed : %d EA valid : %d\n", parse.opt[EAST].parsed, parse.opt[EAST].valided);
+	if (parse.opt[EAST].parsed && parse.opt[EAST].valided)
+		printf("ea : %s\n", qwe = gnl(parse.opt[EAST].fd, 0));
+	free(qwe);
 	return 0;
 }

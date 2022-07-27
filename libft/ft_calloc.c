@@ -1,14 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_tree.c                                       :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 21:27:33 by youngpar          #+#    #+#             */
-/*   Updated: 2022/07/26 22:09:47 by youngpar         ###   ########.fr       */
+/*   Created: 2021/05/08 01:40:55 by youngpar          #+#    #+#             */
+/*   Updated: 2021/12/14 18:53:31 by youngpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/structure.h"
+#include "libft.h"
 
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*p;
+
+	p = malloc(size * count);
+	if (!p)
+		return (NULL);
+	ft_memset(p, 0, size * count);
+	return (p);
+}

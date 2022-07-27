@@ -1,14 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_tree.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 21:27:33 by youngpar          #+#    #+#             */
-/*   Updated: 2022/07/26 22:09:47 by youngpar         ###   ########.fr       */
+/*   Created: 2021/05/04 17:14:45 by youngpar          #+#    #+#             */
+/*   Updated: 2021/12/11 22:09:30 by youngpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/structure.h"
-
+int	ft_tolower(int c)
+{
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}

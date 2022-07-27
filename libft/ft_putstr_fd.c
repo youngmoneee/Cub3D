@@ -1,14 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_tree.c                                       :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 21:27:33 by youngpar          #+#    #+#             */
-/*   Updated: 2022/07/26 22:09:47 by youngpar         ###   ########.fr       */
+/*   Created: 2021/05/09 20:20:51 by youngpar          #+#    #+#             */
+/*   Updated: 2021/05/10 19:07:01 by youngpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/structure.h"
+#include "libft.h"
 
+void	ft_putstr_fd(char *s, int fd)
+{
+	size_t		idx;
+
+	if (!s)
+		return ;
+	idx = 0;
+	while (s[idx])
+		write(fd, &s[idx++], 1);
+}

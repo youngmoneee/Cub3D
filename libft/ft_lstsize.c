@@ -1,14 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_tree.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 21:27:33 by youngpar          #+#    #+#             */
-/*   Updated: 2022/07/26 22:09:47 by youngpar         ###   ########.fr       */
+/*   Created: 2021/05/10 02:18:16 by youngpar          #+#    #+#             */
+/*   Updated: 2021/12/11 22:26:03 by youngpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/structure.h"
+#include "libft.h"
 
+int	ft_lstsize(t_list *lst)
+{
+	int		size;
+	t_list	*curr;
+
+	if (!lst)
+		return (0);
+	curr = lst;
+	size = 0;
+	while (curr)
+	{
+		curr = curr->next;
+		size++;
+	}
+	return (size);
+}

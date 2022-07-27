@@ -11,38 +11,68 @@
 /* ************************************************************************** */
 
 #include "../inc/structure.h"
+#include "../inc/parse.h"
+#include "../libft/libft.h"
+#include "../inc/util.h"
 
-static bool	max(int a, int b)
+static void	parse_init(t_parse *parse, char *fname)
 {
-	if (a > b)
-		return (a);
-	return (b);
+	uint	idx;
+
+	if (ft_strlen(fname) <= ft_strlen(".cub")
+		|| ft_strncmp(fname + ft_strlen(fname) - 4, ".cub", 5))
+		exit_msg("Wrong File Format");
+	parse->file = fname;
+	parse->fd = open(parse->file, O_RDONLY);
+	if (parse->fd < 0)
+	{
+		perror("Wrong File Name");
+		exit(1);
+	}
+	idx = -1;
+	while (++idx < 6)
+	{
+		parse->opt[idx].parsed = false;
+		parse->opt[idx].valided = false;
+		parse->opt[idx].color = 0xFF000000;
+	}
+	parse->map.width = 0;
+	parse->map.height = 0;
 }
 
-bool		is_valid(char *line, t_parse *parse)
+bool	parsing(t_parse *parse, char *fname)
 {
-	char	buf;
+	char	*line;
+	char	*freer;
+	bool	ret;
 
-	while (*line == ' ')
-		line++;
-	buf = *line++;
-	while (*line == ' ')
-		line++;
+	ret = true;
+	parse_init(parse, fname);
+	while ((line = gnl(parse->fd, 0)))
+	{
+		freer = line;
+		while (*line == ' ')
+			line++;
+		if (*line == 'C' || *line == 'F')
+			set_color(line, parse->opt);
+		else if (*line == 'E' || *line == 'W' || *line == 'N' || *line == 'S')
+			set_path(line, parse->opt);
+		free(freer);
+	}
+	return (ret);
 }
 
 void	mkmap(t_parse *parse, int x, int y)
 {
 	char	buf;
 	int		is_read;
-	t_map	*map;
 
-	map = &parse->map;
 	is_read = read(parse->fd, &buf, 1);
-	parse->map.width = max(parse->map.width, x);
-	parse->map.height = max(parse->map.height, y);
+	parse->map.width = ft_max(parse->map.width, x);
+	parse->map.height = ft_max(parse->map.height, y);
 	if (is_read == false)
 	{
-		parse->map->map = (char **)malloc(sizeof(char *) * (parse->map.height + 1));
+		parse->map.map = (char **)malloc(sizeof(char *) * (parse->map.height + 1));
 		if (parse->map.map)
 			parse->map.map[parse->map.height] = 0;
 		return ;
@@ -50,7 +80,7 @@ void	mkmap(t_parse *parse, int x, int y)
 	if (buf == '\n')
 	{
 		mkmap(parse, 0, y + 1);
-		parse->map.map[y] = (char *)malloc(sizeof(char) * (parse->map.width + 1));
+		parse->map.map[y] = (char *)malloc(sizeof(char) * (parse->map.width + 2));
 		while (x < parse->map.width)
 			parse->map.map[y][x++] = ' ';
 		parse->map.map[y][parse->map.width] = 0;

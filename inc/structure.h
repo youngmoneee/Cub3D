@@ -9,16 +9,35 @@
 #include <stdbool.h>
 
 typedef unsigned int	uint;
-
+typedef unsigned char	uchar;
+typedef enum			e_options
+{
+	FLOOR,
+	CEIL,
+	EAST,
+	WEST,
+	NORTH,
+	SOUTH,
+	UNKNOWN
+}						t_options;
 /*
  *	map[height][width]
  */
 
+typedef struct s_img
+{
+	void	*ptr;
+	uchar	*data;
+	uint	width;
+	uint	height;
+	double	aspect;
+}	t_img;
+
 typedef struct s_map
 {
 	char	**map;
-	int		width;
-	int		height;
+	uint	width;
+	uint	height;
 }	t_map;
 
 /*
@@ -27,9 +46,11 @@ typedef struct s_map
 
 typedef struct s_option
 {
-	char	*path;
+	int		fd;
+	t_img	img;
 	uint	color;
 	bool	parsed;
+	bool	valided;
 }	t_option;
 
 typedef struct s_parse

@@ -1,0 +1,12 @@
+F              255       ,  128    ,         0
+C 1, 1, 1
+
+NO ./resource/no_tmp_path
+SO ./resource/so_tmp_path
+EA ./resource/ea_tmp_path
+WE ./resource/we_tmp_path
+
+0101011010101
+123818
+     1010230
+    134
