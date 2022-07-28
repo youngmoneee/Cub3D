@@ -11,9 +11,7 @@ char	*gnl(int fd, int idx)
 	int		is_read;
 
 	is_read = read(fd, &buf, 1);
-	if (!(is_read || idx))
-		return 0;
-	else if (is_read == 0 || buf == '\n')
+	if (is_read == 0 || buf == '\n')
 	{
 		ret = (char *) malloc(sizeof(char) * (idx + 1));
 		buf = 0;

@@ -38,6 +38,8 @@ typedef struct s_map
 	char	**map;
 	uint	width;
 	uint	height;
+	bool	is_parsed;
+	bool	is_valided;
 }	t_map;
 
 /*
@@ -59,6 +61,7 @@ typedef struct s_parse
 	int			fd;
 	t_option	opt[6];
 	t_map		map;
+	bool		is_parsed;
 }	t_parse;
 
 typedef struct s_player t_player;
