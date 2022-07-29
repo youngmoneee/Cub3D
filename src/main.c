@@ -20,36 +20,10 @@ int main(int a, char **v) {
 	if (a != 2)
 		exit(1);
 	parsing(&parse, v[1]);
-	printf("floor parsed : %d floor valided : %d\n", parse.opt[FLOOR].parsed, parse.opt[FLOOR].valided);
 	if (parse.opt[FLOOR].parsed && parse.opt[FLOOR].valided)
 		printf("floor : %X\n", parse.opt[FLOOR].color);
-	printf("ceil parsed : %d ceil valided : %d\n", parse.opt[CEIL].parsed, parse.opt[CEIL].valided);
 	if (parse.opt[CEIL].parsed && parse.opt[CEIL].valided)
 		printf("ceil : %X\n", parse.opt[CEIL].color);
 
-	// news
-	for (int i = EAST; i < UNKNOWN; i++)
-		printf("fd => %d\n", parse.opt[i].fd);
-	printf("WE parsed : %d WE valid : %d\n", parse.opt[WEST].parsed, parse.opt[WEST].valided);
-	if (parse.opt[WEST].parsed && parse.opt[WEST].valided)
-		printf("we : %s\n", gnl(parse.opt[WEST].fd, 0));
-	printf("SO parsed : %d SO valid : %d\n", parse.opt[SOUTH].parsed, parse.opt[SOUTH].valided);
-	if (parse.opt[SOUTH].parsed && parse.opt[SOUTH].valided)
-		printf("so : %s\n", gnl(parse.opt[SOUTH].fd, 0));
-	printf("NO parsed : %d NO valid : %d\n", parse.opt[NORTH].parsed, parse.opt[NORTH].valided);
-	if (parse.opt[NORTH].parsed && parse.opt[NORTH].valided)
-		printf("no : %s\n", gnl(parse.opt[NORTH].fd, 0));
-	printf("EA parsed : %d EA valid : %d\n", parse.opt[EAST].parsed, parse.opt[EAST].valided);
-	if (parse.opt[EAST].parsed && parse.opt[EAST].valided)
-		printf("ea : %s\n", gnl(parse.opt[EAST].fd, 0));
-	int x, y = -1;
-	while (parse.map.map[++y])
-	{
-		x = -1;
-		while (parse.map.map[y][++x])
-		{
-			printf("[%c]", parse.map.map[y][x]);
-		} printf("\n");
-	}
 	return 0;
 }

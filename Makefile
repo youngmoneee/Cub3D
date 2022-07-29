@@ -2,8 +2,8 @@ NAME	= cub3d
 CC		= cc
 CFLAGS	= #-Wall -Wextra -Werror
 
-#FRMWRK	= -framework Opengl -framework Appkit
-FRMWRK = -framework Metal -framework Metalkit
+FRMWRK	= -framework Opengl -framework Appkit
+#FRMWRK = -framework Metal -framework Metalkit
 MLX		= mlx
 MLXDIR	= mlxdir
 LIBFT	= ft
@@ -38,8 +38,8 @@ $(LIBFT):
 
 clean	:
 	rm -rf $(OBJS)
-	#@$(MAKE) clean -C $(MLXDIR)
-	#@$(MAKE) clean -C $(LIBDIR)
+	@$(MAKE) clean -C $(MLXDIR)
+	@$(MAKE) clean -C $(LIBDIR)
 
 fclean	: clean
 	rm -rf $(NAME)
