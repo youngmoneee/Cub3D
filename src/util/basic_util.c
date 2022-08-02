@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include "../libft/libft.h"
+#include "../../libft/libft.h"
 
 char	*gnl(int fd, int idx)
 {
