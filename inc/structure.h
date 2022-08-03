@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include "../mlxdir/mlx.h"
 
 /*
  *	KEY CODE
@@ -24,10 +25,11 @@
 # define KEY_SPACE	0x31
 
 # define KEY_ESC	0x35
-# define RED_DOT	0xA1
+# define RED_DOT	0x11
 
-# define WIN_WIDTH	800
-# define WIN_HEIGHT	600
+//	1024 * 768
+# define WIN_WIDTH	1024
+# define WIN_HEIGHT	768
 
 /*
  *	SHORT TYPE NAME
@@ -58,9 +60,9 @@ typedef enum			e_options
 typedef struct s_img
 {
 	void	*ptr;
-	uchar	*data;
-	uint	lsz;
-	uint	bpp;
+	char	*data;
+	int		lsz;
+	int		bpp;
 	int		endian;
 	double	aspect;
 }	t_img;
@@ -101,9 +103,25 @@ typedef struct s_parse
 	bool		is_valided;
 }	t_parse;
 
-typedef struct s_player t_player;
+typedef struct s_user
+{
+	double	x;
+	double	y;
+	double	radius;
+} t_user;
 typedef struct s_pos t_pos;
-typedef struct s_mlx t_mlx;
-typedef struct s_win t_win;
+typedef struct s_mlx
+{
+	void	*pmlx;
+	void	*pwin;
+	t_img	img;
+}	t_mlx;
+typedef struct s_cub
+{
+	t_mlx	mlx;
+	t_user	user;
+	t_parse	parse;
+
+}	t_cub;
 
 #endif

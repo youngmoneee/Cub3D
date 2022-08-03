@@ -16,7 +16,7 @@ SRCD	= src
 MODEL	= parse_1.c \
 			parse_map.c \
 			parse_option.c
-DISPLAY	= window_init.c
+VIEW	= window_init.c
 #CONTROL =
 UTIL	= basic_util.c
 
@@ -24,9 +24,8 @@ UTIL	= basic_util.c
 SRCF	= main.c \
 		  $(addprefix model/, $(MODEL)) \
 		  $(addprefix view/, $(VIEW)) \
-		  #$(addprefix control/, $(CONTROL))
 		  $(addprefix util/, $(UTIL))
-		  
+		  #$(addprefix control/, $(CONTROL))
 
 SRCS	= $(addprefix $(SRCD)/, $(SRCF))
 OBJS	= $(SRCS:.c=.o)

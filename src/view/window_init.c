@@ -1,20 +1,36 @@
 #include "../../inc/structure.h"
 
-int		init_win(t_mlx *mlx)
+bool	init_win(t_mlx *mlx)
 {
-	mlx->mlx_ptr = mlx_init();
-	mlx->win_ptr = mlx_new_window(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "./fractol");
-	mlx->img.imgptr = mlx_new_image(mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
-	mlx->img.data = mlx_get_data_addr(mlx->img.imgptr, &mlx->img.bpp, &mlx->img.lsize, &mlx->img.endian);
-
-	if (!(mlx->mlx_ptr && mlx->win_ptr && mlx->img.imgptr && mlx->img.data))
+	mlx->pmlx = mlx_init();
+	if (!mlx->pmlx)
+		return (0);
+	mlx->pwin = mlx_new_window(mlx->pmlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
+	if (!mlx->pwin)
+		return (0);
+	mlx->img.ptr = mlx_new_image(mlx->pmlx, WIN_WIDTH, WIN_HEIGHT);
+	if (!mlx->img.ptr)
+		return (0);
+	mlx->img.data = mlx_get_data_addr(mlx->img.ptr, &mlx->img.bpp, &mlx->img.lsz, &mlx->img.endian);
+	if (!mlx->img.data)
 		return (0);
 	return (1);
 }
 
 int	close_mlx(t_mlx *mlx)
 {
-	mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-	exit(0);
+	if (mlx)
+	{
+		mlx_destroy_window(mlx->pmlx, mlx->pwin);
+		exit(0);
+	}
 	return (0);
+}
+
+int	render(t_cub *cub)
+{
+	init_win(&cub->mlx);
+	mlx_hook(cub->mlx.pwin, RED_DOT, 0, *close_mlx, &cub->mlx);
+	mlx_loop(cub->mlx.pmlx);
+	return (1);
 }

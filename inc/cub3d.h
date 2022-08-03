@@ -3,5 +3,6 @@
 
 #include "structure.h"
 #include "parse.h"
+#include "render.h"
 
 #endif
