@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/structure.h"
+#include "../../inc/cub3d.h"
 #include "../../libft/libft.h"
 #include "../../inc/util.h"
 

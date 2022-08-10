@@ -1,4 +1,3 @@
-#include "../../inc/structure.h"
 #include "../../inc/cub3d.h"
 
 int	close_mlx(t_mlx *mlx)
@@ -13,7 +12,6 @@ int	close_mlx(t_mlx *mlx)
 
 int	render(t_cub *cub)
 {
-	init_win(&cub->mlx);
 	mlx_hook(cub->mlx.pwin, RED_DOT, 0, *close_mlx, &cub->mlx);
 	mlx_loop(cub->mlx.pmlx);
 	return (1);
