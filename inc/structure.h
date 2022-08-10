@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <math.h>
 #include "../mlxdir/mlx.h"
 
 /*
@@ -26,6 +27,11 @@
 
 # define KEY_ESC	0x35
 # define RED_DOT	0x11
+
+# define ASP_N		M_PI * 0
+# define ASP_S		M_PI * 1
+# define ASP_W		M_PI * 0.5
+# define ASP_E		M_PI * 1.5
 
 //	1024 * 768
 # define WIN_WIDTH	1024
@@ -107,7 +113,9 @@ typedef struct s_user
 {
 	double	x;
 	double	y;
-	double	radius;
+	double	radian;
+	bool		is_parsed;
+	bool		is_valided;
 } t_user;
 typedef struct s_pos t_pos;
 typedef struct s_mlx
