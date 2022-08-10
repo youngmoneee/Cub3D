@@ -15,13 +15,15 @@
 #include "../inc/util.h"
 
 int main(int a, char **v) {
-	//t_parse parse;
-	//t_mlx	mlx;
 	t_cub	cub;
 
 	if (a != 2)
 		exit(1);
-	parsing(&cub.parse, v[1]);
+	//	INITIALIZATION
+	init(&cub, v[1]);
+	parsing(&cub.parse);
+	set_user(&cub.parse.map, &cub.user);
+
 	int i = -1;
 	while (++i < 6)
 		printf("%d ) Parsed : %d, Valid : %d\n", i, cub.parse.opt[i].parsed, cub.parse.opt[i].valided);
@@ -38,11 +40,10 @@ int main(int a, char **v) {
 			printf("[%c]", cub.parse.map.map[i][j]);
 		printf("\n");
 	}
+	printf("Player's Position\nX : %f\nY : %f\nASP : %f\n", cub.user.x, cub.user.y, cub.user.radian);
 	// VIEW
-	if (!mlx_init(&cub.mlx))
+	if (!init_win(&cub.mlx))
 		exit_msg("Window Init Failed.");
-	render(&cub.parse, &cub.mlx);
-	//mlx_hook(&mlx.pwin, RED_DOT, 0, close_mlx, &mlx);
-	mlx_loop(cub.mlx.pmlx);
+	render(&cub);
 	return 0;
 }

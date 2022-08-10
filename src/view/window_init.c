@@ -1,21 +1,5 @@
 #include "../../inc/structure.h"
-
-bool	init_win(t_mlx *mlx)
-{
-	mlx->pmlx = mlx_init();
-	if (!mlx->pmlx)
-		return (0);
-	mlx->pwin = mlx_new_window(mlx->pmlx, WIN_WIDTH, WIN_HEIGHT, "cub3d");
-	if (!mlx->pwin)
-		return (0);
-	mlx->img.ptr = mlx_new_image(mlx->pmlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!mlx->img.ptr)
-		return (0);
-	mlx->img.data = mlx_get_data_addr(mlx->img.ptr, &mlx->img.bpp, &mlx->img.lsz, &mlx->img.endian);
-	if (!mlx->img.data)
-		return (0);
-	return (1);
-}
+#include "../../inc/cub3d.h"
 
 int	close_mlx(t_mlx *mlx)
 {
