@@ -15,11 +15,12 @@ SRCD	= src
 
 MODEL	= parse_1.c \
 			parse_map.c \
-			parse_option.c
+			parse_option.c \
+			parse_user.c \
+			init.c
 VIEW	= window_init.c
-#CONTROL =
 UTIL	= basic_util.c
-
+#CONTROL =
 
 SRCF	= main.c \
 		  $(addprefix model/, $(MODEL)) \
@@ -51,8 +52,8 @@ $(LIBFT):
 
 clean	:
 	rm -rf $(OBJS)
-	@$(MAKE) clean -C $(MLXDIR)
-	@$(MAKE) clean -C $(LIBDIR)
+	#@$(MAKE) clean -C $(MLXDIR)
+	#@$(MAKE) clean -C $(LIBDIR)
 
 fclean	: clean
 	rm -rf $(NAME)
