@@ -90,7 +90,15 @@ typedef struct s_user
 	bool		is_parsed;
 	bool		is_valided;
 } t_user;
-typedef struct s_pos t_pos;
+typedef struct s_key
+{
+	bool	w;
+	bool	a;
+	bool	s;
+	bool	d;
+	bool	larw;
+	bool	rarw;
+}	t_key;
 typedef struct s_mlx
 {
 	void	*pmlx;
@@ -102,7 +110,7 @@ typedef struct s_cub
 	t_mlx	mlx;
 	t_user	user;
 	t_parse	parse;
-
+	t_key	key;
 }	t_cub;
 
 #endif

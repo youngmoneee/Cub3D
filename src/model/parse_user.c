@@ -48,3 +48,11 @@ void	set_user(t_map *map, t_user *user)
 		}
 	}
 }
+
+bool	check_boundary(t_cub *cub, int cx, int cy)
+{
+	if (cx < 0 || cy < 0 || cx >= cub->parse.map.width
+		|| cy >= cub->parse.map.height || cub->parse.map.map[cy][cx] == ' ')
+		return (true);
+	return (false);
+}

@@ -18,15 +18,17 @@ MODEL	= parse_1.c \
 			parse_option.c \
 			parse_user.c \
 			init.c
-VIEW	= render.c
+VIEW	= render.c \
+			minimap.c
+CONTROL = move.c \
+			key_handler.c
 UTIL	= basic_util.c
-#CONTROL =
 
 SRCF	= main.c \
 		  $(addprefix model/, $(MODEL)) \
 		  $(addprefix view/, $(VIEW)) \
-		  $(addprefix util/, $(UTIL))
-		  #$(addprefix control/, $(CONTROL))
+		  $(addprefix util/, $(UTIL)) \
+		  $(addprefix control/, $(CONTROL))
 
 SRCS	= $(addprefix $(SRCD)/, $(SRCF))
 OBJS	= $(SRCS:.c=.o)

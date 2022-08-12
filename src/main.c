@@ -14,6 +14,14 @@
 #include <stdio.h>
 #include "../inc/util.h"
 
+static int	update(t_cub *cub)
+{
+	rotate(cub);
+    move(cub);
+    render(cub);
+	return (0);
+}
+
 int main(int a, char **v) {
 	t_cub	cub;
 
@@ -45,5 +53,10 @@ int main(int a, char **v) {
 	if (!init_win(&cub.mlx))
 		exit_msg("Window Init Failed.");
 	render(&cub);
+	mlx_hook(cub.mlx.pwin, X_KEY_PRESS, 0, key_press, &cub);
+    mlx_hook(cub.mlx.pwin, X_KEY_REALEASE, 0, key_release, &cub);
+	mlx_hook(cub.mlx.pwin, RED_DOT, 0, close_mlx, &cub.mlx);
+	mlx_loop_hook(cub.mlx.pmlx, update, &cub);
+	mlx_loop(cub.mlx.pmlx);
 	return 0;
 }
