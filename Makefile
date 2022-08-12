@@ -1,5 +1,5 @@
 NAME	= cub3d
-CC		= cc
+CC		= arch -x86_64 cc
 CFLAGS	= #-Wall -Wextra -Werror
 
 FRMWRK	= -framework Opengl -framework Appkit
@@ -18,7 +18,7 @@ MODEL	= parse_1.c \
 			parse_option.c \
 			parse_user.c \
 			init.c
-VIEW	= window_init.c
+VIEW	= render.c
 UTIL	= basic_util.c
 #CONTROL =
 

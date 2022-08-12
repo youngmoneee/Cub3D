@@ -32,6 +32,16 @@
 # define WIN_WIDTH	1024
 # define WIN_HEIGHT	768
 
+//	Minimap
+# define MMAP_W		160
+# define MMAP_H		120
+# define PAD_X		(MMAP_W / 2) + 40
+# define PAD_Y		(MMAP_H / 2) + 30
+
+# define BG_COLOR	0xAAAAAA
+# define FRAME		0xFFFFFF
+# define GRID		0xFF0000
+
 /*
  * Init
  */

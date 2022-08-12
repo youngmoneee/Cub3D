@@ -35,7 +35,7 @@ void	init(t_cub *cub, char *fname)
 	{
 		parse->opt[idx].parsed = false;
 		parse->opt[idx].valided = false;
-		parse->opt[idx].color = 0xFF000000;
+		parse->opt[idx].color = 0x00;
 	}
 	parse->is_parsed = false;
 	cub->user.is_parsed = false;
