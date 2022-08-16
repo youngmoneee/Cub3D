@@ -6,7 +6,7 @@ bool	is_wall(t_cub *cub, double nx, double ny)
 	if ((nx < 0) || (nx >= cub->parse.map.width)
 		|| (ny < 0) || (ny >= cub->parse.map.height))
 		return (true);
-	return (cub->parse.map.map[(int)round(ny)][(int)round(nx)] == '1');
+	return (cub->parse.map.map[(int)ceil(ny)][(int)ceil(nx)] == '1');
 }
 
 void	move(t_cub *cub)

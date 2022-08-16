@@ -41,7 +41,7 @@
 # define WIN_HEIGHT	768
 
 //	Minimap
-# define MMAP_SZ	251
+# define MMAP_SZ	240
 # define PAD_X		(MMAP_SZ / 2) + 40
 # define PAD_Y		(MMAP_SZ / 2) + 30
 # define N_TILE     8

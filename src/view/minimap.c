@@ -38,7 +38,7 @@ static void	draw_ray(t_cub *cub, int len)
 	oy = cub->user.y;
 	//x = cos(cub->user.radian) * (ROTANGLE);
 	//y = sin(cub->user.radian) * (ROTANGLE);
-	printf("%lf\n", x/ y);
+	ray(cub);
 	dist = 1;
 	/*
 	while (dist <= len)
@@ -52,12 +52,14 @@ static void	draw_ray(t_cub *cub, int len)
 		draw_pixel(PAD_X + ox, PAD_Y + oy, 0xFF0000, &cub->mlx.img);
 	}
 	 */
+	
 	for (int i = 1; i < len; i++)
 	{
-		x = i * sin(cub->user.radian);
-		y = i * cos(cub->user.radian);
-		draw_pixel(PAD_X - y, PAD_Y - x, 0, &cub->mlx.img);
+		y = i * sin(cub->user.radian);
+		x = i * cos(cub->user.radian);
+		draw_pixel(PAD_X - x, PAD_Y - y, 0, &cub->mlx.img);
 	}
+	
 }
 
 void	draw_mmap(t_cub *cub)
@@ -73,8 +75,8 @@ void	draw_mmap(t_cub *cub)
 		j = -MMAP_SZ / 2 - 1;
 		while (++j <= MMAP_SZ / 2)
 		{
-			cx = (int)round(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
-			cy = (int)round(cub->user.y + (i * N_TILE / (double)MMAP_SZ));
+			cx = (int)ceil(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
+			cy = (int)ceil(cub->user.y + (i * N_TILE / (double)MMAP_SZ));
 			if (draw_minimap(cub, j, i))
 				continue ;
 			else if (check_boundary(cub, cx, cy))

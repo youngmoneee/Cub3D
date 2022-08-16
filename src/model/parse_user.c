@@ -19,8 +19,8 @@ static void	set_aspect(int i, int j, char *c, t_user *user)
 	if (user->is_parsed)
 		user->is_valided = false;
 	user->is_parsed = true;
-	user->x = j;
-	user->y = i;
+	user->x = j - 0.5;
+	user->y = i - 0.5;
 	if (*c == 'N')
 		user->radian = ASP_N;
 	else if (*c == 'S')

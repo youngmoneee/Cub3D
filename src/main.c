@@ -21,7 +21,7 @@ static int	update(t_cub *cub)
     render(cub);
 	//printf("%lf\n", cub->user.radian / M_PI * (double)180);
 	//printf("%lf\n", cub->user.radian / M_PI);
-	printf("ux : %lf uy : %lf\n", cub->user.x, cub->user.y);
+	//printf("ux : %lf uy : %lf\n", cub->user.x, cub->user.y);
 	return (0);
 }
 
