@@ -6,6 +6,8 @@
 #include "render.h"
 #include "handler.h"
 
+# define _USE_MATH_DEFINES
+
 /*
  *	KEY CODE
  */
@@ -29,10 +31,10 @@
 # define KEY_ESC	0x35
 # define RED_DOT	0x11
 
-# define ASP_N		M_PI * 0
-# define ASP_S		M_PI * 1
-# define ASP_W		M_PI * 0.5
-# define ASP_E		M_PI * 1.5
+# define ASP_N		M_PI * 0.5
+# define ASP_S		M_PI * 1.5
+# define ASP_W		M_PI * 1
+# define ASP_E		M_PI * 0
 
 //	1024 * 768
 # define WIN_WIDTH	1024
@@ -54,8 +56,9 @@
 /*
  *  Player
  */
-# define SPEED      0.1
+# define SPEED      0.8
 # define ROTANGLE   ((M_PI) / 180)
+# define ROTSPEED	(ROTANGLE) * 1
 
 /*
  * Init

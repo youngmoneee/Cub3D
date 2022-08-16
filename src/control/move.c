@@ -17,9 +17,9 @@ void	move(t_cub *cub)
 	double	my;
 
 	nx = cub->user.x;
-	mx = cos(cub->user.radian) * (ROTANGLE);// * SPEED;
+	mx = cos(cub->user.radian) * (ROTANGLE) * SPEED;
 	ny = cub->user.y;
-	my = sin(cub->user.radian) * (ROTANGLE);// * SPEED;
+	my = sin(cub->user.radian) * (ROTANGLE) * SPEED;
 	if (cub->key.w)
 	{
 		ny -= my;
@@ -31,9 +31,15 @@ void	move(t_cub *cub)
 		nx += mx;
 	}
 	if (cub->key.a)
-		nx -= mx;
+	{
+		ny += mx;
+		nx -= my;
+	}
 	if (cub->key.d)
-		nx += mx;
+	{
+		ny -= mx;
+		nx += my;
+	}
 	if (!is_wall(cub, nx, ny))
 	{
 		cub->user.x = nx;
@@ -43,15 +49,14 @@ void	move(t_cub *cub)
 		cub->user.x = nx;
 	else if (!is_wall(cub, cub->user.x, ny))
 		cub->user.y = ny;
-	printf("%lf %lf\n", mx, my);	
 }
 
 void	rotate(t_cub *cub)
 {
 	if (cub->key.larw)
-		cub->user.radian -= ROTANGLE;
+		cub->user.radian -= ROTSPEED;
 	if (cub->key.rarw)
-		cub->user.radian += ROTANGLE;
+		cub->user.radian += ROTSPEED;
 	if (cub->user.radian < 0)
 		cub->user.radian += M_PI * 2;
 	if (cub->user.radian > M_PI * 2)

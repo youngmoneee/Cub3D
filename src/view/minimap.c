@@ -19,9 +19,45 @@ static bool	draw_minimap(t_cub *cub, int x, int y)
 		draw_pixel(PAD_X + x, PAD_Y + y, FRAME, &cub->mlx.img);
 	else if ((x % (MMAP_SZ / N_TILE) == 0) || (y % (MMAP_SZ / N_TILE) == 0))
 		draw_pixel(PAD_X + x, PAD_Y + y, GRID, &cub->mlx.img);
+	else if (atan2(x - cub->user.x, y - cub->user.y) * M_PI == cub->user.radian)
+		draw_pixel(PAD_X + x, PAD_Y + y, 0xFAFAFA, &cub->mlx.img);
 	else
 		return (false);
 	return (true);
+}
+
+static void	draw_ray(t_cub *cub, int len)
+{
+	double	x;
+	double	y;
+	double	ox;
+	double	oy;
+	double	dist;
+
+	ox = cub->user.x;
+	oy = cub->user.y;
+	//x = cos(cub->user.radian) * (ROTANGLE);
+	//y = sin(cub->user.radian) * (ROTANGLE);
+	printf("%lf\n", x/ y);
+	dist = 1;
+	/*
+	while (dist <= len)
+	{
+		ox -= x;
+		oy -= y;
+		ox = round(ox);
+		oy = round(oy);
+		dist = sqrt(pow(cub->user.x - ox, 2.0) + pow(cub->user.y - oy, 2.0));
+		//printf("%lf %lf %lf\n", x, y, dist);
+		draw_pixel(PAD_X + ox, PAD_Y + oy, 0xFF0000, &cub->mlx.img);
+	}
+	 */
+	for (int i = 1; i < len; i++)
+	{
+		x = i * sin(cub->user.radian);
+		y = i * cos(cub->user.radian);
+		draw_pixel(PAD_X - y, PAD_Y - x, 0, &cub->mlx.img);
+	}
 }
 
 void	draw_mmap(t_cub *cub)
@@ -50,4 +86,5 @@ void	draw_mmap(t_cub *cub)
 				cub->parse.opt[FLOOR].color, &cub->mlx.img);
 		}
 	}
+	draw_ray(cub, 100);
 }

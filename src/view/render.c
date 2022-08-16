@@ -33,13 +33,14 @@ void	draw_bg(t_cub *cub)
 			draw_pixel(j, i, cub->parse.opt[CEIL].color, &cub->mlx.img);
 		}
 	}
-	while (++i < WIN_HEIGHT)
+	while (i < WIN_HEIGHT)
 	{
 		j = -1;
 		while (++j < WIN_WIDTH)
 		{
 			draw_pixel(j, i, cub->parse.opt[FLOOR].color, &cub->mlx.img);
 		}
+		i++;
 	}
 }
 

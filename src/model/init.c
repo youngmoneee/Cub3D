@@ -19,7 +19,9 @@ void	init(t_cub *cub, char *fname)
 	uint	idx;
 	t_parse	*parse;
 
+	ft_memset(cub, 0, sizeof(t_cub));
 	parse = &cub->parse;
+	printf("%p\n", parse);
 	if (ft_strlen(fname) <= ft_strlen(".cub")
 		|| ft_strncmp(fname + ft_strlen(fname) - 4, ".cub", 5))
 		exit_msg("Wrong File Format");
@@ -30,16 +32,19 @@ void	init(t_cub *cub, char *fname)
 		perror("Wrong File Name");
 		exit(1);
 	}
-	idx = -1;
+	//idx = -1;
+	/*
 	while (++idx < 6)
 	{
 		parse->opt[idx].parsed = false;
 		parse->opt[idx].valided = false;
 		parse->opt[idx].color = 0x00;
 	}
-	parse->is_parsed = false;
-	cub->user.is_parsed = false;
+	 */
+	//parse->is_parsed = false;
+	//cub->user.is_parsed = false;
 	cub->user.is_valided = true;
+	//ft_memset(&cub->key, 0, sizeof(t_key));
 }
 
 bool	init_win(t_mlx *mlx)
