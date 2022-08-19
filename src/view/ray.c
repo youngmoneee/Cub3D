@@ -8,7 +8,7 @@ static double  shoot_y(t_cub *cub, double rad, double x, double y)
     double nextX, nextY, diffX, diffY;
 
     printf("%lf %lf\n", x, y);
-	draw_pixel(PAD_X - x, PAD_Y - y, 0, &cub->mlx.img);
+	//draw_pixel(PAD_X - x, PAD_Y - y, 0, &cub->mlx.img);
     //if (cub->parse.map.map[(int)ceil(y)][(int)ceil(x)] == '1')
     //    return sqrt(pow(x - cub->user.x, 2.0) + pow(y - cub->user.y, 2.0));
     if (mx < 0) nextX = (int)floor(x);
@@ -19,20 +19,21 @@ static double  shoot_y(t_cub *cub, double rad, double x, double y)
     diffY = nextY - y;
     printf("origin : %lf %lf\n", x, y);
     for (int i = 0;i < 10; i++) {
-        printf("X : %.3lf Y : %.3lf\n", x, y);
+		printf("X : %.3lf Y : %.3lf\n", x, y);
         if (mx < 0) nextX = (int)floor(x);
         else nextX = (int)floor(x + 1);
         if (my < 0) nextY = (int)floor(y);
         else nextY = (int)floor(y + 1);
-        diffX = nextX - x;
-        diffY = nextY - y;
-        
+        diffX = diffX + x;
+        diffY = diffY + y;
+		printf("diffX : %.3lf diffY : %.3lf\n", diffX, diffY);
+
         if (fabs(diffX) < fabs(diffY)) {
             x += diffX;
-            y += diffY * my / mx;
+            y += diffY * (my / mx);
         }
         else {
-            x += diffX * mx / my;
+            x += diffX * (mx / my);
             y += diffY;
         }
         //printf("1step x : %lf %lf\n", x + diffX, y + diffY * my / mx);
