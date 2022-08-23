@@ -32,28 +32,10 @@ static bool	draw_minimap(t_cub *cub, int x, int y)
 	else if ((x % (MMAP_SZ / N_TILE) == 0) || (y % (MMAP_SZ / N_TILE) == 0))
 		draw_pixel(PAD_X + x, PAD_Y + y, GRID, &cub->mlx.img);
 	else if (atan2(x - cub->user.x, y - cub->user.y) * M_PI == cub->user.radian)
-		draw_pixel(PAD_X + x, PAD_Y + y, 0xFAFAFA, &cub->mlx.img);
+		draw_pixel(PAD_X + x, PAD_Y + y, 0xFFFFFF, &cub->mlx.img);
 	else
 		return (false);
 	return (true);
-}
-
-static void	draw_ray(t_cub *cub, int len)
-{
-	double	x;
-	double	y;
-	double	ox;
-	double	oy;
-	double	dist;
-
-	ox = cub->user.x;
-	oy = cub->user.y;
-
-	ray(cub);
-	dist = 1;
-	
-
-	
 }
 
 void	draw_mmap(t_cub *cub)
@@ -69,8 +51,8 @@ void	draw_mmap(t_cub *cub)
 		j = -MMAP_SZ / 2 - 1;
 		while (++j <= MMAP_SZ / 2)
 		{
-			cx = (int)floorf(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
-			cy = (int)floorf(cub->user.y + (i * N_TILE / (double)MMAP_SZ));
+			cx = (int)floorl(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
+			cy = (int)floorl(cub->user.y + (i * N_TILE / (double)MMAP_SZ));
 			if (draw_minimap(cub, j, i))
 				continue ;
 			else if (check_boundary(cub, cx, cy))

@@ -52,7 +52,7 @@ void	set_map(char *trigger_line, t_parse *parse)
 	idx = -1;
 	parse->map.width = ft_strlen(trigger_line);
 	parse->map.height = 1;
-	parse->map.is_parsed = true;
+	//parse->map.is_parsed = true;
 	mkmap(parse, 1);
 	if (!parse->map.map)
 		exit_msg("Memory Error");

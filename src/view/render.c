@@ -13,7 +13,7 @@
 #include "../../inc/cub3d.h"
 #include <math.h>
 
-int	close_mlx(t_mlx *mlx)
+int		close_mlx(t_mlx *mlx)
 {
 	if (mlx)
 	{
