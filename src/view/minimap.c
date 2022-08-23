@@ -52,14 +52,7 @@ static void	draw_ray(t_cub *cub, int len)
 	ray(cub);
 	dist = 1;
 	
-	for (int i = 1; i < len; i++)
-	{
-		y = i * -sin(cub->user.radian);
-		x = i * -cos(cub->user.radian);
-		//if (is_wall(cub, x, y))
-		//	break ;
-		draw_pixel(PAD_X + x, PAD_Y + y, 0, &cub->mlx.img);
-	}
+
 	
 }
 
@@ -89,5 +82,5 @@ void	draw_mmap(t_cub *cub)
 				cub->parse.opt[FLOOR].color, &cub->mlx.img);
 		}
 	}
-	draw_ray(cub, 100);
+	ray(cub);
 }
