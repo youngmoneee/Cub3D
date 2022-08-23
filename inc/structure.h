@@ -112,5 +112,9 @@ typedef struct s_cub
 	t_parse	parse;
 	t_key	key;
 }	t_cub;
-
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}	t_pos;
 #endif
