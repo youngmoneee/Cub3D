@@ -1,63 +1,33 @@
 #include "../../inc/cub3d.h"
 #include <math.h>
 
-static double  shoot_y(t_cub *cub, double rad, double x, double y)
+static double  shoot(t_cub *cub, double rad, double x, double y)
 {
     double mx = -cos(rad);
     double my = -sin(rad);
     double nextX, nextY, diffX, diffY;
 
-    printf("%lf %lf\n", x, y);
-	//draw_pixel(PAD_X - x, PAD_Y - y, 0, &cub->mlx.img);
-    //if (cub->parse.map.map[(int)ceil(y)][(int)ceil(x)] == '1')
-    //    return sqrt(pow(x - cub->user.x, 2.0) + pow(y - cub->user.y, 2.0));
-    if (mx < 0) nextX = (int)floor(x);
-    else nextX = (int)floor(x + 1);
-    if (my < 0) nextY = (int)floor(y);
-    else nextY = (int)floor(y + 1);
+	nextX = mx < 0 ? (int)floor(x) : (int)floor(x + 1);
+	nextY = my < 0 ? (int)floor(y) : (int)floor(y + 1);
+	draw_pixel(PAD_X + nextX, PAD_Y + nextY * N_TILE, 0x1f1f1f, &cub->mlx.img);
+	draw_pixel(PAD_X + nextX - 1, PAD_Y + nextY * N_TILE, 0x1f1f1f, &cub->mlx.img);
+	draw_pixel(PAD_X + nextX + 1, PAD_Y + nextY * N_TILE, 0x1f1f1f, &cub->mlx.img);
+	if (is_wall(cub, nextX, nextY))
+		return sqrt(pow(nextX - cub->user.x, 2.0) + pow(nextY - cub->user.y, 2.0));
     diffX = nextX - x;
     diffY = nextY - y;
-    printf("origin : %lf %lf\n", x, y);
-    for (int i = 0;i < 10; i++) {
-		printf("X : %.3lf Y : %.3lf\n", x, y);
-        if (mx < 0) nextX = (int)floor(x);
-        else nextX = (int)floor(x + 1);
-        if (my < 0) nextY = (int)floor(y);
-        else nextY = (int)floor(y + 1);
-        diffX = diffX + x;
-        diffY = diffY + y;
-		printf("diffX : %.3lf diffY : %.3lf\n", diffX, diffY);
-
-        if (fabs(diffX) < fabs(diffY)) {
-            x += diffX;
-            y += diffY * (my / mx);
-        }
-        else {
-            x += diffX * (mx / my);
-            y += diffY;
-        }
-        //printf("1step x : %lf %lf\n", x + diffX, y + diffY * my / mx);
-        //printf("1step y : %lf %lf\n", x + diffX * mx/my, y + diffY);
-    }
-    /*
-    diffX = nextX - x;
-    diffY = nextY - y;
-    if (fabs(diffX) < fabs(diffY))
-    {
-        if (diffY && diffX)
-            shoot_y(cub, rad, x + diffX, y + diffY/diffX);
-        else
-            shoot_y(cub, rad, x + diffX, y);
-    }
-    else
-    {
-        if (diffX)
-            shoot_y(cub, rad, x + diffX, y + diffY/diffX);
-        else
-            shoot_y(cub, rad, x, y + diffY);
-    }
-    */
-    return 0;
+	printf("dx : %lf dy : %lf\n", diffX, diffY);
+	if (fabs(diffX / mx) < fabs(diffY / my))
+	{
+		nextX = x + diffX;
+		nextY = y + diffX * (my / mx);
+	}
+	else
+	{
+		nextX = x + diffY * (mx / my);
+		nextY = y + diffY;
+	}
+	return (shoot(cub, rad, nextX, nextY));
 }
 
 int ray(t_cub *cub)
@@ -67,6 +37,7 @@ int ray(t_cub *cub)
     int     nextX;
     int     nextY;
 
+	/*
     nx = -cos(cub->user.radian);
     ny = -sin(cub->user.radian);
 
@@ -74,7 +45,8 @@ int ray(t_cub *cub)
     else nextX = (int)floor(cub->user.x + 1);
     if (ny < 0) nextY = (int)floor(cub->user.y);
     else nextY = (int)floor(cub->user.y + 1);
-    shoot_y(cub, cub->user.radian, cub->user.x, cub->user.y);
+    */
+    printf("거리 : %lf\n",shoot(cub, cub->user.radian, cub->user.x, cub->user.y));
     //printf("방향 : %lf %lf\n", nx, ny);
     //printf("차이 : [X : %lf] [Y : %lf]\n", fabs(nextX - cub->user.x), fabs(nextY - cub->user.y));
     return 1;

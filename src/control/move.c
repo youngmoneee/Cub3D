@@ -1,5 +1,5 @@
-#include "../inc/cub3d.h"
-#include "../mlxdir/mlx.h"
+#include "../../inc/cub3d.h"
+#include "../../mlxdir/mlx.h"
 
 bool	is_wall(t_cub *cub, double nx, double ny)
 {

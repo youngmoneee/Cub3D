@@ -73,4 +73,5 @@ bool	init_win(t_mlx *mlx);
  */
 
 bool	check_boundary(t_cub *cub, int cx, int cy);
+bool	is_wall(t_cub *cub, double nx, double ny);
 #endif
