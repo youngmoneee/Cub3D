@@ -55,8 +55,8 @@ $(LIBFT):
 
 clean	:
 	rm -rf $(OBJS)
-	#@$(MAKE) clean -C $(MLXDIR)
-	#@$(MAKE) clean -C $(LIBDIR)
+	@$(MAKE) clean -C $(MLXDIR)
+	@$(MAKE) clean -C $(LIBDIR)
 
 fclean	: clean
 	rm -rf $(NAME)
