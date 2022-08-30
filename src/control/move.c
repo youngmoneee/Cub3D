@@ -12,6 +12,7 @@
 
 #include "../../inc/cub3d.h"
 #include "../../mlxdir/mlx.h"
+#include "../../inc/util.h"
 
 bool	is_wall(t_cub *cub, double nx, double ny)
 {
@@ -69,8 +70,5 @@ void	rotate(t_cub *cub)
 		cub->user.radian -= ROTSPEED;
 	if (cub->key.rarw)
 		cub->user.radian += ROTSPEED;
-	if (cub->user.radian < 0)
-		cub->user.radian += M_PI * 2;
-	if (cub->user.radian > M_PI * 2)
-		cub->user.radian -= M_PI * 2;
+	cub->user.radian = normalize(cub->user.radian);
 }

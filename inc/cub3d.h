@@ -36,9 +36,15 @@
 # define ASP_W		M_PI * 1
 # define ASP_E		M_PI * 0
 
+# define DX         0
+# define DY         1
+# define HORZ       0
+# define VERT       1
+
 //	1024 * 768
 # define WIN_WIDTH	1024
 # define WIN_HEIGHT	768
+
 
 //	Minimap
 # define MMAP_SZ	240
@@ -59,6 +65,7 @@
 # define SPEED      0.8
 # define ROTANGLE   ((M_PI) / 180)
 # define ROTSPEED	(ROTANGLE) * 1
+# define DIST_CAM   ((WIN_WIDTH / 2) / tan(ROTANGLE / 2))
 
 /*
  * Init

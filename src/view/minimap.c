@@ -26,13 +26,8 @@ static bool	draw_minimap(t_cub *cub, int x, int y)
 	}
 	if (x <= 2 && y <= 2 && x >= -2 && y >= -2)
 		draw_pixel(PAD_X + x, PAD_Y + y, PLAYER, &cub->mlx.img);			
-	//else if ((x == (-MMAP_SZ / 2)) || (x == (MMAP_SZ / 2))
-	//	|| (y == (-MMAP_SZ / 2)) || (y == (MMAP_SZ / 2)))
-	//	draw_pixel(PAD_X + x, PAD_Y + y, FRAME, &cub->mlx.img);
 	else if ((x % (MMAP_SZ / N_TILE) == 0) || (y % (MMAP_SZ / N_TILE) == 0))
 		draw_pixel(PAD_X + x, PAD_Y + y, GRID, &cub->mlx.img);
-	//else if (atan2(x - cub->user.x, y - cub->user.y) * M_PI == cub->user.radian)
-	//	draw_pixel(PAD_X + x, PAD_Y + y, 0xFFFFFF, &cub->mlx.img);
 	else
 		return (false);
 	return (true);
@@ -64,11 +59,4 @@ void	draw_mmap(t_cub *cub)
 				cub->parse.opt[FLOOR].color, &cub->mlx.img);
 		}
 	}
-	for (int i = 0; i < 30; i++) {
-		double ny = i * -sin(cub->user.radian);
-		double nx = i * -cos(cub->user.radian);
-
-		draw_pixel(PAD_X + nx, PAD_Y + ny, 0, &cub->mlx.img);
-	}
-	//ray(cub);
 }

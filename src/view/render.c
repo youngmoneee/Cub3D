@@ -60,6 +60,7 @@ int	render(t_cub *cub)
 {
 	draw_bg(cub);
 	draw_mmap(cub);
+	raycast(cub);
 	mlx_put_image_to_window(cub->mlx.pmlx, \
 		cub->mlx.pwin, cub->mlx.img.ptr, 0, 0);
 	return (1);

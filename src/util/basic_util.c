@@ -15,6 +15,13 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include "../../libft/libft.h"
+#include <math.h>
+
+double	normalize(double angle)
+{
+	angle = remainder(angle, M_PI * 2);
+	return (angle < 0 ? M_PI * 2 + angle : angle);
+}
 
 char	*gnl(int fd, int idx)
 {
