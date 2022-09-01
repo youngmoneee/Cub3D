@@ -23,7 +23,8 @@ VIEW	= render.c \
 			ray.c
 CONTROL = move.c \
 			key_handler.c
-UTIL	= basic_util.c
+UTIL	= basic_util.c \
+		  mapcheck.c
 
 SRCF	= main.c \
 		  $(addprefix model/, $(MODEL)) \

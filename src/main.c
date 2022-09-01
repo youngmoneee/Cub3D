@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 21:25:59 by youngpar          #+#    #+#             */
-/*   Updated: 2022/07/26 21:26:00 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/02 06:32:24 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ int main(int a, char **v) {
 	init(&cub, v[1]);
 	parsing(&cub.parse);
 	set_user(&cub.parse.map, &cub.user);
+	if (mapcheck(cub.parse.map))
+		printf("MAP OK!!!!!\n");
+	else
+	{
+		printf("MAP NO!!!!!\n");
+		return (0);
+	}
 
 	int i = -1;
 	while (++i < 6)
@@ -49,6 +56,7 @@ int main(int a, char **v) {
 		printf("\n");
 	}
 	printf("Player's Position\nX : %f\nY : %f\nASP : %f\n", cub.user.x, cub.user.y, cub.user.radian);
+
 	// VIEW
 	if (!init_win(&cub.mlx))
 		exit_msg("Window Init Failed.");
