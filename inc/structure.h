@@ -119,17 +119,19 @@ typedef struct s_pos
 }	t_pos;
 typedef struct s_ray
 {
-	double	dest[2];
-	double	step[2];
-	double	hit_x[2];
-	double	hit_y[2];
 	double	angle;
-	char	direction;
-	/*
-	 *	True : vertical
-	 *	False : Horizon
-	 */
+	double	start[2][2];
+	double	step[2][2];
+	double	end[2][2];
 	double	dist[2];
+	double	s[2];
+	double	e[2];
+	double	d;
+	double	offset[2];
+	/*
+	 *	0 : Horizon, DY
+	 *	1 : vertical, DX
+	 */
 	bool	_hit;
 }	t_ray;
 #endif

@@ -46,17 +46,17 @@ $(NAME)	: $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS) -I $(INC) -L. -l$(MLX) -l$(LIBFT) $(FRMWRK) -o $(NAME)
 
 $(MLX)	:
-	@$(MAKE) -C $(MLXDIR)
-	cp $(MLXDIR)/libmlx.dylib ./
+	#@$(MAKE) -C $(MLXDIR)
+	#cp $(MLXDIR)/libmlx.dylib ./
 
 $(LIBFT):
-	@$(MAKE) -C $(LIBDIR)
-	cp $(LIBDIR)/libft.a ./
+	#@$(MAKE) -C $(LIBDIR)
+	#cp $(LIBDIR)/libft.a ./
 
 clean	:
 	rm -rf $(OBJS)
-	@$(MAKE) clean -C $(MLXDIR)
-	@$(MAKE) clean -C $(LIBDIR)
+	#@$(MAKE) clean -C $(MLXDIR)
+	#@$(MAKE) clean -C $(LIBDIR)
 
 fclean	: clean
 	rm -rf $(NAME)

@@ -31,19 +31,19 @@
 # define KEY_ESC	0x35
 # define RED_DOT	0x11
 
-# define ASP_N		M_PI * 0.5
-# define ASP_S		M_PI * 1.5
+# define ASP_S		M_PI * 0.5
+# define ASP_N		M_PI * 1.5
 # define ASP_W		M_PI * 1
 # define ASP_E		M_PI * 0
 
-# define DX         0
-# define DY         1
+# define DY         0
+# define DX         1
 # define HORZ       0
 # define VERT       1
 
 //	1024 * 768
-# define WIN_WIDTH	1024
-# define WIN_HEIGHT	768
+# define WIN_WIDTH	640
+# define WIN_HEIGHT	480
 
 
 //	Minimap
@@ -65,7 +65,8 @@
 # define SPEED      0.8
 # define ROTANGLE   ((M_PI) / 180)
 # define ROTSPEED	(ROTANGLE) * 1
-# define DIST_CAM   ((WIN_WIDTH / 2) / tan(ROTANGLE / 2))
+# define FOV        (60 * ROTANGLE)
+# define DIST_CAM   ((WIN_WIDTH / 2) / tan(FOV / 2))
 
 /*
  * Init
@@ -80,5 +81,5 @@ bool	init_win(t_mlx *mlx);
  */
 
 bool	check_boundary(t_cub *cub, int cx, int cy);
-bool	is_wall(t_cub *cub, double nx, double ny);
+bool	is_wall(t_cub *cub, int nx, int ny);
 #endif

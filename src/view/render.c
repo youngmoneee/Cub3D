@@ -56,6 +56,39 @@ void	draw_bg(t_cub *cub)
 	}
 }
 
+void	draw_ray(t_cub *cub, t_ray *ray)
+{
+	double	sx;
+	double	sy;
+	double	ex;
+	double	ey;
+	double	ofsx;
+	double	ofsy;
+	double	longe;
+
+	sx = 0;
+	sy = 0;
+	ex = ray->e[DX] - cub->user.x;
+	ey = ray->e[DY] - cub->user.y;
+	longe = (fabs(ex) >= fabs(ey) ? fabs(ex) : fabs(ey));
+	//printf("%lf %lf\n", sqrt((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy)), ray->d);
+	/*
+	while(sqrt((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy)) < ray->d)
+	{
+		sx += ray->offset[DX] / N_TILE;
+		sy += ray->offset[DY] / N_TILE;
+		draw_pixel(PAD_X + sx * (MMAP_SZ / N_TILE), PAD_Y + sy * (MMAP_SZ / N_TILE), 0, &cub->mlx.img);
+	}
+	*/
+	ofsx = ex / longe;
+	ofsy = ey / longe;
+	while (sqrt((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy))) {
+		sx += ofsx / N_TILE;
+		sy += ofsy / N_TILE;
+		draw_pixel(PAD_X + sx * (MMAP_SZ / N_TILE / 2), PAD_Y + sy * (MMAP_SZ / N_TILE / 2), 0, &cub->mlx.img);
+	}
+}
+
 int	render(t_cub *cub)
 {
 	draw_bg(cub);

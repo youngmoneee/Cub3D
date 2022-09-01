@@ -7,56 +7,106 @@ static double   dist_btwen(double x1, double x2, double y1, double y2)
     return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
+static bool is_down(double angle)
+{
+    return (angle > 0 && angle < M_PI);
+}
+static bool is_up(double angle)
+{
+    return (!is_down(angle));
+}
+static bool is_left(double angle)
+{
+    return (angle > 0.5 * M_PI && angle < 1.5 * M_PI);
+}
+static bool is_right(double angle)
+{
+    return (!is_left(angle));
+}
+
 static void    horizon_check(t_cub *cub, t_ray *ray)
 {
-    ray->dest[DY] = floor(cub->user.y) + !((ray->direction >> 1) & 0b1);
-    ray->dest[DX] = cub->user.x + (ray->dest[DY] - cub->user.y) / tan(ray->angle);
-    ray->step[DY] = ((ray->direction >> 1) & 0b1) ? -1 : 1;
-    ray->step[DX] = 1 / tan(ray->angle);
-    ray->step[DX] *= ((ray->direction & 0b1) && ray->step[DX] > 0) ? -1 : 1;
-    ray->step[DX] *= (!(ray->direction & 0b1) && ray->step[DX] < 0) ? -1 : 1;
-    ray->hit_x[HORZ] = ray->dest[DX];
-    ray->hit_y[HORZ] = ray->dest[DY];
-    while (!is_wall(cub, ray->hit_x[HORZ], ray->hit_y[HORZ]))
+    double  x;
+    double  y;
+
+    ray->start[HORZ][DY] = floor(cub->user.y) + is_down(ray->angle);
+    ray->start[HORZ][DX] = cub->user.x + (ray->start[HORZ][DY] - cub->user.y) / tan(ray->angle);
+    
+    ray->step[HORZ][DY] = is_up(ray->angle) ? -1 : 1;
+    ray->step[HORZ][DX] = 1 / tan(ray->angle);
+
+    ray->step[HORZ][DX] *= (is_left(ray->angle) && ray->step[HORZ][DX] > 0) ? -1 : 1;
+    ray->step[HORZ][DX] *= (is_right(ray->angle) && ray->step[HORZ][DX] < 0) ? -1 : 1;
+    ray->end[HORZ][DX] = ray->start[HORZ][DX];
+    ray->end[HORZ][DY] = ray->start[HORZ][DY];
+    while (!is_wall(cub, ray->end[HORZ][DX], ray->end[HORZ][DY]))
     {
-        double cx = ray->hit_x[HORZ];
-        double cy = ray->hit_y[HORZ] - ((ray->direction >> 1) & 0b1);
-        draw_pixel(PAD_X + ray->hit_x[HORZ], PAD_Y + ray->hit_y[HORZ], 0xFF0000, &cub->mlx.img);
-        ray->hit_x[HORZ] += ray->step[DX];
-        ray->hit_x[HORZ] += ray->step[DY];
+        x = ray->end[HORZ][DX];
+        y = ray->end[HORZ][DY] + (is_up(ray->angle) ? -1 : 0);
+        if (is_wall(cub, x, y))
+            break ;
+        ray->end[HORZ][DX] += ray->step[HORZ][DX];
+        ray->end[HORZ][DY] += ray->step[HORZ][DY];
     }
-    ray->dist[HORZ] = dist_btwen(cub->user.x, ray->hit_x[HORZ], cub->user.y, ray->hit_y[HORZ]);
+    ray->dist[HORZ] = dist_btwen(cub->user.x, ray->end[HORZ][DX], cub->user.y, ray->end[HORZ][DY]);
 }
 
 static void     vertical_check(t_cub *cub, t_ray *ray)
 {
-    ray->dest[DX] = floor(cub->user.x) + !(ray->direction & 0b1);
-    ray->dest[DY] = cub->user.y + (ray->dest[DX] - cub->user.x) * tan(ray->angle);
-    ray->step[DX] = (ray->direction & 0b1) ? -1 : 1;
-    ray->step[DY] = 1 * tan(ray->angle);
-    ray->step[DY] *= ((ray->direction >> 1) & 0b1) && ray->step[DY] > 0 ? -1 : 1;
-    ray->step[DY] *= (!(ray->direction & 0b1) && ray->step[DY] < 0) ? -1 : 1;
-    ray->hit_x[VERT] = ray->dest[DX];
-    ray->hit_y[VERT] = ray->dest[DY];
-    while (!is_wall(cub, ray->hit_x[VERT], ray->hit_y[VERT]))
+    double  x;
+    double  y;
+
+    ray->start[VERT][DX] = floor(cub->user.x) + is_right(ray->angle);
+    ray->start[VERT][DY] = cub->user.y + (ray->start[VERT][DX] - cub->user.x) * tan(ray->angle);
+    
+    ray->step[VERT][DX] = is_left(ray->angle) ? -1 : 1;
+    ray->step[VERT][DY] = 1 * tan(ray->angle);
+
+    ray->step[VERT][DY] *= (is_up(ray->angle) && ray->step[VERT][DY] > 0) ? -1 : 1;
+    ray->step[VERT][DY] *= (is_down(ray->angle) && ray->step[VERT][DY] < 0) ? -1 : 1;
+    
+    ray->end[VERT][DX] = ray->start[VERT][DX];
+    ray->end[VERT][DY] = ray->start[VERT][DY];
+    while (!is_wall(cub, ray->end[VERT][DX], ray->end[VERT][DY]))
     {
-        double cx = ray->hit_x[VERT];
-        double cy = ray->hit_y[VERT] - ((ray->direction >> 1) & 0b1);
-        draw_pixel(PAD_X + ray->hit_x[VERT], PAD_Y + ray->hit_y[VERT], 0xFF0000, &cub->mlx.img);
-        ray->hit_x[VERT] += ray->step[DX];
-        ray->hit_x[VERT] += ray->step[DY];
+        x = ray->end[VERT][DX] + (is_left(ray->angle) ? -1 : 0);
+        y = ray->end[VERT][DY];
+        if (is_wall(cub, x, y))
+            break ;
+        ray->end[VERT][DX] += ray->step[VERT][DX];
+        ray->end[VERT][DY] += ray->step[VERT][DY];
     }
-    ray->dist[VERT] = dist_btwen(cub->user.x, ray->hit_x[VERT], cub->user.y, ray->hit_y[VERT]);
+    ray->dist[VERT] = dist_btwen(cub->user.x, ray->end[VERT][DX], cub->user.y, ray->end[VERT][DY]);
 }
 
 static void  shoot(t_cub *cub, t_ray *ray, int col)
 {
- 
-    //  next horizon
+    //  check horizon
+    horizon_check(cub, ray);
 
-
-    //  next vertical
+    //  check vertical
+    vertical_check(cub, ray);
     
+    if (ray->dist[HORZ] < ray->dist[VERT])
+    {
+        ray->s[DX] = ray->start[HORZ][DX];
+        ray->s[DY] = ray->start[HORZ][DY];
+        ray->e[DX] = ray->end[HORZ][DX];
+        ray->e[DY] = ray->end[HORZ][DY];
+        ray->offset[DX] = ray->step[HORZ][DX];
+        ray->offset[DY] = ray->step[HORZ][DY];
+        ray->d = ray->dist[HORZ];
+    }
+    else
+    {
+        ray->s[DX] = ray->start[VERT][DX];
+        ray->s[DY] = ray->start[VERT][DY];
+        ray->e[DX] = ray->end[VERT][DX];
+        ray->e[DY] = ray->end[VERT][DY];
+        ray->offset[DX] = ray->step[VERT][DX];
+        ray->offset[DY] = ray->step[VERT][DY];
+        ray->d = ray->dist[VERT];
+    }
 }
 
 int raycast(t_cub *cub)
@@ -66,15 +116,23 @@ int raycast(t_cub *cub)
 
     i = -1;
     ft_memset(&ray, 0, sizeof(t_ray) * WIN_WIDTH);
+    printf("Player's Position : %lf %lf\n", cub->user.x, cub->user.y);
     while (++i < WIN_WIDTH)
     {
-        ray[i].angle = cub->user.radian + atan((i - WIN_WIDTH/2) / DIST_CAM);
+        ray[i].angle = cub->user.radian + (i - WIN_WIDTH / 2) * FOV / WIN_WIDTH;//atan((i - WIN_WIDTH / 2) / DIST_CAM);
         ray[i].angle = normalize(ray[i].angle);
-        //  up direction : 0b1x down 0b0x
-        ray[i].direction |= (ray->angle > 0 && ray->angle < M_PI ? 0b10 : 0b00);
-        //  left direction : 0bx1 right 0bx0
-        ray[i].direction |= (ray->angle > M_PI * 0.5 && ray->angle < M_PI * 1.5 ? 0b01 : 0b00);
         shoot(cub, &ray[i], i);
+        if (i % 10 == 0)
+        {
+            draw_ray(cub, &ray[i]);
+            //printf("%d > start : %lf %lf\n", i, ray[i].s[DX], ray[i].s[DY]);
+            //printf("%d > e n d : %lf %lf\n", i, ray[i].e[DX], ray[i].e[DY]);
+        }
+        //printf("%d %d\n", i, (int)(ray[i].d * MMAP_SZ / N_TILE));
+        //printf("%lf %lf\n", ray[i].offset[DX], ray[i].offset[DY]);
+        //printf("%d %lf %lf\n", i, ray[i].e[DX], ray[i].e[DY]);
+        //printf("%d : %lf\n", i, ray[i].angle / ROTANGLE);
     }
+    //printf("%lf %lf\n", ray[WIN_WIDTH / 2].e[DX], ray[WIN_WIDTH / 2].e[DY]);
     return 1;
 }

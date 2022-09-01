@@ -29,7 +29,6 @@ int key_press(int code, t_cub *cub)
         key->larw = true;
     if (code == KEY_RIGHT)
         key->rarw = true;
-    printf("%x\n", code);
     return (0);
 }
 
