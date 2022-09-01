@@ -14,12 +14,12 @@
 #include "../../mlxdir/mlx.h"
 #include "../../inc/util.h"
 
-bool	is_wall(t_cub *cub, double nx, double ny)
+bool	is_wall(t_cub *cub, int nx, int ny)
 {
 	if ((nx < 0) || (nx >= cub->parse.map.width)
 		|| (ny < 0) || (ny >= cub->parse.map.height))
 		return (true);
-	return (cub->parse.map.map[(int)ny][(int)(nx)] == '1');
+	return (cub->parse.map.map[(int)ny][(int)nx] == '1');
 }
 
 void	move(t_cub *cub)
@@ -30,9 +30,9 @@ void	move(t_cub *cub)
 	double	my;
 
 	nx = cub->user.x;
-	mx = -cos(cub->user.radian) * (ROTANGLE) * SPEED;
+	mx = cos(cub->user.radian) * (ROTANGLE) * SPEED;
 	ny = cub->user.y;
-	my = -sin(cub->user.radian) * (ROTANGLE) * SPEED;
+	my = sin(cub->user.radian) * (ROTANGLE) * SPEED;
 	if (cub->key.w)
 	{
 		ny += my;

@@ -46,8 +46,8 @@ void	draw_mmap(t_cub *cub)
 		j = -MMAP_SZ / 2 - 1;
 		while (++j <= MMAP_SZ / 2)
 		{
-			cx = (int)floorl(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
-			cy = (int)floorl(cub->user.y + (i * N_TILE / (double)MMAP_SZ));
+			cx = (int)floor(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
+			cy = (int)floor(cub->user.y + (i * N_TILE / (double)MMAP_SZ));
 			if (draw_minimap(cub, j, i))
 				continue ;
 			else if (check_boundary(cub, cx, cy))
