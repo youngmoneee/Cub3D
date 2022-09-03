@@ -76,17 +76,28 @@ void	draw_ray(t_cub *cub, t_ray *ray)
 	ofsy = ey / ray->d * N_TILE / MMAP_SZ;
 	int i = -1;
 	
-	while (++i < ray->d * MMAP_SZ / N_TILE && MMAP_SZ / 2 - sqrt((sx * sx) + (sy * sy)) > 1) {
+	while (++i < ray->d * MMAP_SZ / N_TILE && fabs(sqrt((sx * sx) + (sy * sy)) - MMAP_SZ / 2) > 1) {
+		draw_pixel(PAD_X + sx, PAD_Y + sy, 0, &cub->mlx.img);
 		sx += ofsx;
 		sy += ofsy;
-		draw_pixel(PAD_X + sx, PAD_Y + sy, 0, &cub->mlx.img);
+	}
+}
+
+void	draw_wall(t_cub *cub, t_ray *ray, int i)
+{
+	int	idx = -1;
+	int	h = WIN_HEIGHT / 2 / ray->d / cos((i - WIN_WIDTH / 2) * FOV / WIN_WIDTH);
+
+	while (++idx < h && idx < WIN_HEIGHT / 2)
+	{
+		draw_pixel(i, WIN_HEIGHT / 2 + idx, 0x424242, &cub->mlx.img);
+		draw_pixel(i, WIN_HEIGHT / 2 - idx, 0x424242, &cub->mlx.img);
 	}
 }
 
 int	render(t_cub *cub)
 {
 	draw_bg(cub);
-	draw_mmap(cub);
 	raycast(cub);
 	mlx_put_image_to_window(cub->mlx.pmlx, \
 		cub->mlx.pwin, cub->mlx.img.ptr, 0, 0);

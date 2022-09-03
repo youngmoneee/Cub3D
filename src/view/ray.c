@@ -121,11 +121,12 @@ int raycast(t_cub *cub)
         ray[i].angle = cub->user.radian + (i - WIN_WIDTH / 2) * FOV / WIN_WIDTH;//atan((i - WIN_WIDTH / 2) / DIST_CAM);
         ray[i].angle = normalize(ray[i].angle);
         shoot(cub, &ray[i], i);
-        if (i % 20 == 0)
-        {
-            draw_ray(cub, &ray[i]);
-        }
-        //draw_wall(cub, &ray[i]);
+        draw_wall(cub, &ray[i], i);
     }
+	draw_mmap(cub);
+    i = -1;
+    while (++i < WIN_WIDTH)
+        if (i % 32 == 0)
+            draw_ray(cub, &ray[i]);
     return 1;
 }
