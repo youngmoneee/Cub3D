@@ -116,23 +116,16 @@ int raycast(t_cub *cub)
 
     i = -1;
     ft_memset(&ray, 0, sizeof(t_ray) * WIN_WIDTH);
-    printf("Player's Position : %lf %lf\n", cub->user.x, cub->user.y);
     while (++i < WIN_WIDTH)
     {
         ray[i].angle = cub->user.radian + (i - WIN_WIDTH / 2) * FOV / WIN_WIDTH;//atan((i - WIN_WIDTH / 2) / DIST_CAM);
         ray[i].angle = normalize(ray[i].angle);
         shoot(cub, &ray[i], i);
-        if (i % 10 == 0)
+        if (i % 20 == 0)
         {
             draw_ray(cub, &ray[i]);
-            //printf("%d > start : %lf %lf\n", i, ray[i].s[DX], ray[i].s[DY]);
-            //printf("%d > e n d : %lf %lf\n", i, ray[i].e[DX], ray[i].e[DY]);
         }
-        //printf("%d %d\n", i, (int)(ray[i].d * MMAP_SZ / N_TILE));
-        //printf("%lf %lf\n", ray[i].offset[DX], ray[i].offset[DY]);
-        //printf("%d %lf %lf\n", i, ray[i].e[DX], ray[i].e[DY]);
-        //printf("%d : %lf\n", i, ray[i].angle / ROTANGLE);
+        //draw_wall(cub, &ray[i]);
     }
-    //printf("%lf %lf\n", ray[WIN_WIDTH / 2].e[DX], ray[WIN_WIDTH / 2].e[DY]);
     return 1;
 }

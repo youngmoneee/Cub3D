@@ -68,24 +68,18 @@ void	draw_ray(t_cub *cub, t_ray *ray)
 
 	sx = 0;
 	sy = 0;
-	ex = ray->e[DX] - cub->user.x;
-	ey = ray->e[DY] - cub->user.y;
+	ex = (ray->e[DX] - cub->user.x) * MMAP_SZ / N_TILE;
+	ey = (ray->e[DY] - cub->user.y) * MMAP_SZ / N_TILE;
 	longe = (fabs(ex) >= fabs(ey) ? fabs(ex) : fabs(ey));
-	//printf("%lf %lf\n", sqrt((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy)), ray->d);
-	/*
-	while(sqrt((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy)) < ray->d)
-	{
-		sx += ray->offset[DX] / N_TILE;
-		sy += ray->offset[DY] / N_TILE;
-		draw_pixel(PAD_X + sx * (MMAP_SZ / N_TILE), PAD_Y + sy * (MMAP_SZ / N_TILE), 0, &cub->mlx.img);
-	}
-	*/
-	ofsx = ex / longe;
-	ofsy = ey / longe;
-	while (sqrt((ex - sx) * (ex - sx) + (ey - sy) * (ey - sy))) {
-		sx += ofsx / N_TILE;
-		sy += ofsy / N_TILE;
-		draw_pixel(PAD_X + sx * (MMAP_SZ / N_TILE / 2), PAD_Y + sy * (MMAP_SZ / N_TILE / 2), 0, &cub->mlx.img);
+
+	ofsx = ex / ray->d * N_TILE / MMAP_SZ;
+	ofsy = ey / ray->d * N_TILE / MMAP_SZ;
+	int i = -1;
+	
+	while (++i < ray->d * MMAP_SZ / N_TILE && MMAP_SZ / 2 - sqrt((sx * sx) + (sy * sy)) > 1) {
+		sx += ofsx;
+		sy += ofsy;
+		draw_pixel(PAD_X + sx, PAD_Y + sy, 0, &cub->mlx.img);
 	}
 }
 
