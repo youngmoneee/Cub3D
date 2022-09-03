@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:16:30 by youngpar          #+#    #+#             */
-/*   Updated: 2022/08/23 17:16:32 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/04 01:07:56 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int key_press(int code, t_cub *cub)
         key->larw = true;
     if (code == KEY_RIGHT)
         key->rarw = true;
+	if (code == KEY_ESC)
+		exit(0);
     return (0);
 }
 
