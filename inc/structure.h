@@ -43,7 +43,7 @@ typedef struct s_img
 	int		lsz;
 	int		bpp;
 	int		endian;
-	double	aspect;
+	//double	aspect;
 }	t_img;
 
 /*
@@ -70,6 +70,8 @@ typedef struct s_option
 	uint	color;
 	bool	parsed;
 	bool	valided;
+	int		width;
+	int		height;
 }	t_option;
 
 typedef struct s_parse
@@ -80,6 +82,7 @@ typedef struct s_parse
 	t_map		map;
 	bool		is_parsed;
 	bool		is_valided;
+	void		*mlx;
 }	t_parse;
 
 typedef struct s_user

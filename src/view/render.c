@@ -87,7 +87,12 @@ void	draw_wall(t_cub *cub, t_ray *ray, int i)
 {
 	int	idx = -1;
 	int	h = WIN_HEIGHT / 2 / ray->d / cos((i - WIN_WIDTH / 2) * FOV / WIN_WIDTH);
+	int			face;
+	t_option	*opt;
+	uint	color[2];
 
+	//	TODO
+	//if (ray->e[DX] == (int)ray->e[DX])
 	while (++idx < h && idx < WIN_HEIGHT / 2)
 	{
 		draw_pixel(i, WIN_HEIGHT / 2 + idx, 0x424242, &cub->mlx.img);

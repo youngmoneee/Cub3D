@@ -77,7 +77,7 @@ void	set_color(char *line, t_option *opt)
 	atocolor(line, 16, op);
 }
 
-void	set_path(char *line, t_option *opt)
+void	set_path(char *line, t_option *opt, void *mlx)
 {
 	uint	sz;
 	uint	idx;
@@ -93,12 +93,11 @@ void	set_path(char *line, t_option *opt)
 	if (opt[idx].parsed)
 		exit_msg("Redefined Resource Path");
 	opt[idx].parsed = true;
-	opt[idx].fd = open(arg[1], O_RDONLY);
-	if (opt[idx].fd < 0)
-		exit_msg("Open Failed");
+	opt[idx].img.ptr = mlx_xpm_file_to_image(mlx, arg[1], &opt[idx].width, &opt[idx].height);
 	sz = -1;
 	while (arg[++sz])
 		free(arg[sz]);
 	free(arg);
-	opt[idx].valided = true;
+	if (opt[idx].img.ptr)
+		opt[idx].valided = true;
 }

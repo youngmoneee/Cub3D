@@ -65,7 +65,7 @@ void	parsing(t_parse *parse)
 		if (ft_strchr("FC", *line))
 			set_color(line, parse->opt);
 		else if (ft_strchr("NEWS", *line))
-			set_path(line, parse->opt);
+			set_path(line, parse->opt, parse->mlx);
 		else if (ft_strchr("10", *line))
 		{
 			set_map(freer, parse);

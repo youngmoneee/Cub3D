@@ -31,9 +31,7 @@ void	init(t_cub *cub, char *fname)
 		perror("Wrong File Name");
 		exit(1);
 	}
-
 	cub->user.is_valided = true;
-	//ft_memset(&cub->key, 0, sizeof(t_key));
 }
 
 bool	init_win(t_mlx *mlx)

@@ -1,10 +1,10 @@
 F 0, 255, 255
 C 0, 255, 0
 
-NO           ./resource/no_tmp_path
-SO    ./resource/so_tmp_path
-EA ./resource/ea_tmp_path
-WE ./resource/we_tmp_path
+NO           ./resource/nort.xpm
+SO    ./resource/sout.xpm
+EA ./resource/east.xpm
+WE ./resource/west.xpm
 
 11111111111
 100000000001111111111

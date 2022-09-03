@@ -29,6 +29,9 @@ int main(int a, char **v) {
 		exit(1);
 	//	INITIALIZATION
 	init(&cub, v[1]);
+	if (!init_win(&cub.mlx))
+		exit_msg("Window Init Failed.");
+	cub.parse.mlx = cub.mlx.pmlx;
 	parsing(&cub.parse);
 	set_user(&cub.parse.map, &cub.user);
 	if (mapcheck(cub.parse.map))
@@ -58,8 +61,6 @@ int main(int a, char **v) {
 	printf("Player's Position\nX : %f\nY : %f\nASP : %f\n", cub.user.x, cub.user.y, cub.user.radian);
 
 	// VIEW
-	if (!init_win(&cub.mlx))
-		exit_msg("Window Init Failed.");
 	render(&cub);
 	mlx_hook(cub.mlx.pwin, X_KEY_PRESS, 0, key_press, &cub);
     mlx_hook(cub.mlx.pwin, X_KEY_REALEASE, 0, key_release, &cub);

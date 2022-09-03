@@ -42,8 +42,10 @@
 # define VERT       1
 
 //	1024 * 768
-# define WIN_WIDTH	1024
-# define WIN_HEIGHT	768
+# define WIN_WIDTH	800
+# define WIN_HEIGHT	600
+
+# define BOX_SZ     WIN_HEIGHT
 
 
 //	Minimap
@@ -66,7 +68,7 @@
 # define ROTANGLE   ((M_PI) / 180)
 # define ROTSPEED	(ROTANGLE) * 1
 # define FOV        (60 * ROTANGLE)
-# define DIST_CAM   ((WIN_WIDTH / 2) / tan(FOV / 2))
+//# define DIST_CAM   ((WIN_WIDTH / 2) / tan(FOV / 2))
 
 /*
  * Init
