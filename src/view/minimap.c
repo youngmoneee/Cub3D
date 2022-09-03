@@ -20,7 +20,7 @@ static bool	draw_minimap(t_cub *cub, int x, int y)
 	dist = round(sqrt(x * x + y * y));
 	if (dist >= (MMAP_SZ / 2 - 1))
 	{
-		if (dist <= (MMAP_SZ / 2))
+		if (dist < (MMAP_SZ / 2))
 			draw_pixel(PAD_X + x, PAD_Y + y, GRID, &cub->mlx.img);			
 		return (true);
 	}

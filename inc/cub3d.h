@@ -42,14 +42,14 @@
 # define VERT       1
 
 //	1024 * 768
-# define WIN_WIDTH	640
-# define WIN_HEIGHT	480
+# define WIN_WIDTH	240
+# define WIN_HEIGHT	240
 
 
 //	Minimap
 # define MMAP_SZ	240
-# define PAD_X		(MMAP_SZ / 2) + 40
-# define PAD_Y		(MMAP_SZ / 2) + 30
+# define PAD_X		(MMAP_SZ / 2)
+# define PAD_Y		(MMAP_SZ / 2)
 # define N_TILE     8
 
 # define BG_COLOR	0xAAAAAA
