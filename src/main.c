@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 21:25:59 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/05 22:13:39 by ykm1256          ###   ########.fr       */
+/*   Updated: 2022/09/06 03:09:44 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	main(int a, char **v)
 	if (!init_win(&cub.mlx))
 		exit_msg("Window Init Failed.");
 	cub.parse.mlx = cub.mlx.pmlx;
+
+	int i = -1;
 	parsing(&cub.parse);
 	set_user(&cub.parse.map, &cub.user);
 	if (mapcheck(cub.parse.map))
@@ -41,7 +43,7 @@ int	main(int a, char **v)
 		printf("MAP NO!!!!!\n");
 		return (0);
 	}
-	int i = -1;
+	i = -1;
 	while (++i < 6)
 		printf("%d ) Parsed : %d, Valid : %d\n", i, cub.parse.opt[i].parsed, cub.parse.opt[i].valided);
 	printf("Parsed : %d, Valid : %d\n", cub.parse.is_parsed, cub.parse.is_valided);

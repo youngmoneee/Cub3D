@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/05 23:32:19 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/06 03:42:40 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ static void	atocolor(char *str, int pos, t_option *opt)
 	while (ft_isspace(*str))
 		str++;
 	if (!pos && !*str)
-	{
 		opt->valided = true;
-		return ;
-	}
 	else if (*str == ',')
 		atocolor(str + 1, pos - 8, opt);
 }
@@ -61,8 +58,10 @@ void	set_color(char *line, t_option *opt)
 
 	if (*line == 'C')
 		op = &opt[CEIL];
-	else
+	else if (*line == 'F')
 		op = &opt[FLOOR];
+	else
+		return ;
 	if (op->parsed)
 	{
 		op->valided = false;
