@@ -79,7 +79,20 @@ static void     vertical_check(t_cub *cub, t_ray *ray)
     ray->dist[VERT] = dist_btwen(cub->user.x, ray->end[VERT][DX], cub->user.y, ray->end[VERT][DY]);
 }
 
-static void  shoot(t_cub *cub, t_ray *ray, int col)
+static int	wall_dir(t_ray *ray)
+{
+	if (ray->e[DX] == (int)ray->e[DX])
+	{
+		if (is_left(ray->angle))
+			return (WEST);
+		return (EAST);
+	}
+	if (is_up(ray->angle))
+		return (SOUTH);
+	return (NORTH);
+}
+
+static void	shoot(t_cub *cub, t_ray *ray, int col)
 {
     //  check horizon
     horizon_check(cub, ray);
@@ -107,6 +120,7 @@ static void  shoot(t_cub *cub, t_ray *ray, int col)
         ray->offset[DY] = ray->step[VERT][DY];
         ray->d = ray->dist[VERT];
     }
+	ray->face = wall_dir(ray);
 }
 
 int raycast(t_cub *cub)
@@ -123,10 +137,12 @@ int raycast(t_cub *cub)
         shoot(cub, &ray[i], i);
         draw_wall(cub, &ray[i], i);
     }
+	/*
 	draw_mmap(cub);
     i = -1;
     while (++i < WIN_WIDTH)
         if (i % 32 == 0)
             draw_ray(cub, &ray[i]);
+    */
     return 1;
 }

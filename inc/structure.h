@@ -123,6 +123,10 @@ typedef struct s_pos
 typedef struct s_ray
 {
 	double	angle;
+	/*
+	 *	0 : Horizon, DY
+	 *	1 : vertical, DX
+	 */
 	double	start[2][2];
 	double	step[2][2];
 	double	end[2][2];
@@ -131,10 +135,7 @@ typedef struct s_ray
 	double	e[2];
 	double	d;
 	double	offset[2];
-	/*
-	 *	0 : Horizon, DY
-	 *	1 : vertical, DX
-	 */
-	bool	_hit;
+	int 	face;
+	bool	hit;
 }	t_ray;
 #endif

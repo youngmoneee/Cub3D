@@ -1,15 +1,14 @@
 F 0, 255, 255
 C 0, 255, 0
 
-NO           ./resource/nort.xpm
-SO    ./resource/sout.xpm
-EA ./resource/east.xpm
+NO           ./resource/north_test.xpm
+SO    ./resource/south_test.xpm
+EA ./resource/dongkim.xpm
 WE ./resource/west.xpm
 
 11111111111
 100000000001111111111
-100000000000000000001
-1000000000000000W0001
+1000000000000000S0001
 111111111111111100111
                10001
                111111

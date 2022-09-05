@@ -94,6 +94,7 @@ void	set_path(char *line, t_option *opt, void *mlx)
 		exit_msg("Redefined Resource Path");
 	opt[idx].parsed = true;
 	opt[idx].img.ptr = mlx_xpm_file_to_image(mlx, arg[1], &opt[idx].width, &opt[idx].height);
+	opt[idx].img.data = mlx_get_data_addr(opt[idx].img.ptr, &opt[idx].img.bpp, &opt[idx].img.lsz, &opt[idx].img.endian);
 	sz = -1;
 	while (arg[++sz])
 		free(arg[sz]);

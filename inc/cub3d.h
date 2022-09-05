@@ -7,7 +7,6 @@
 #include "handler.h"
 
 # define _USE_MATH_DEFINES
-
 /*
  *	KEY CODE
  */
@@ -42,8 +41,8 @@
 # define VERT       1
 
 //	1024 * 768
-# define WIN_WIDTH	800
-# define WIN_HEIGHT	600
+# define WIN_WIDTH	1080
+# define WIN_HEIGHT	920
 
 # define BOX_SZ     WIN_HEIGHT
 

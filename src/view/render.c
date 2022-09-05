@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+#include "../../libft/libft.h"
 #include <math.h>
 
 int		close_mlx(t_mlx *mlx)
@@ -85,18 +86,45 @@ void	draw_ray(t_cub *cub, t_ray *ray)
 
 void	draw_wall(t_cub *cub, t_ray *ray, int i)
 {
-	int	idx = -1;
-	int	h = WIN_HEIGHT / 2 / ray->d / cos((i - WIN_WIDTH / 2) * FOV / WIN_WIDTH);
-	int			face;
-	t_option	*opt;
-	uint	color[2];
+	int	idx;
+	int h = WIN_HEIGHT / 2 / ray->d / cos((i - WIN_WIDTH / 2) * FOV / WIN_WIDTH) * WIN_WIDTH / WIN_HEIGHT;
+	int top = WIN_HEIGHT / 2 - h / 2;
+	int bottom = WIN_HEIGHT / 2 + h / 2;
+	top = top < 0 ? 0 : top;
+	bottom = bottom >= WIN_HEIGHT ? WIN_HEIGHT : bottom;
 
+	//int	texoffsetx = ray->hit == VERT ? (int)ray->e[DY] : (int)ray->e[DX];
+	double texoffx;
+	t_img		*img;
+	t_option	*opt;
+	uint	color;
+
+
+	if (ray->face == NORTH)
+		texoffx = 1 - fmod(ray->e[DX], 1);
+	else if (ray->face == SOUTH)
+		texoffx = fmod(ray->e[DX], 1);
+	else if (ray->face == WEST)
+		texoffx = 1 - fmod(ray->e[DY], 1);
+	else if (ray->face == EAST)
+		texoffx = fmod(ray->e[DY], 1);
 	//	TODO
-	//if (ray->e[DX] == (int)ray->e[DX])
-	while (++idx < h && idx < WIN_HEIGHT / 2)
+	opt = &cub->parse.opt[ray->face];
+	img = &opt->img;
+	int tex_width = opt->width;
+	int tex_height = opt->height;
+
+	for (idx = top; idx < bottom; idx++)
 	{
-		draw_pixel(i, WIN_HEIGHT / 2 + idx, 0x424242, &cub->mlx.img);
-		draw_pixel(i, WIN_HEIGHT / 2 - idx, 0x424242, &cub->mlx.img);
+		int dy = idx + (h / 2) - WIN_HEIGHT / 2;
+		int texoffsety = dy * ((double)tex_height / h);
+		int texoffsetx = texoffx * tex_width;
+		color = *(uint *)(img->data + (texoffsetx * img->bpp / 8) + texoffsety * img->lsz);
+		//if (ray->face == NORTH) color = 0xFF0000;
+		//else if (ray->face == SOUTH) color = 0xFFFF00;
+		//else if (ray->face == WEST) color = 0x0000FF;
+		//else if (ray->face == EAST) color = 0xFF00FF;
+		draw_pixel(i, idx, color, &cub->mlx.img);
 	}
 }
 
