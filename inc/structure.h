@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 21:34:12 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/06 01:30:29 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/06 02:36:22 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct s_img
 typedef struct s_map
 {
 	char	**map;
-	uint	width;
-	uint	height;
+	t_uint	width;
+	t_uint	height;
 	bool	is_parsed;
 	bool	is_valided;
 }	t_map;
@@ -78,7 +78,7 @@ typedef struct s_option
 {
 	int		fd;
 	t_img	img;
-	uint	color;
+	t_uint	color;
 	bool	parsed;
 	bool	valided;
 	int		width;
