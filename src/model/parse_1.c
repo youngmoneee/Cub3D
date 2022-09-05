@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/05/28 21:45:36 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:29:31 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@
 static bool	end_check(t_parse *parse)
 {
 	char	buf;
-	int		ret;
 
-	while ((ret = read(parse->fd, &buf, 1)) > 0)
+	while (read(parse->fd, &buf, 1) > 0)
 	{
 		if (buf && !ft_isspace(buf))
-			return (false) ;
+			return (false);
 	}
 	return (true);
 }
 
 bool	all_parsed(t_parse *parse)
 {
-	uint	i;
+	t_uint	i;
 	bool	ret;
 
 	i = -1;
@@ -41,7 +40,7 @@ bool	all_parsed(t_parse *parse)
 
 bool	all_valid(t_parse *parse)
 {
-	uint	i;
+	t_uint	i;
 	bool	ret;
 
 	i = -1;

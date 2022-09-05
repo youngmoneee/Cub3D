@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:06 by youngpar          #+#    #+#             */
-/*   Updated: 2022/08/23 17:17:08 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:30:55 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ void	mkmap(t_parse *parse, int y)
 	parse->map.height = ft_max(parse->map.height, y);
 	if (buf[idx] == 0)
 	{
-		parse->map.map = (char **)malloc(sizeof(char *) * (parse->map.height + 1));
+		parse->map.map = malloc(sizeof(char *) * (parse->map.height + 1));
 		if (parse->map.map)
 			parse->map.map[parse->map.height] = 0;
 		free(buf);
 		return ;
 	}
-
 	mkmap(parse, y + 1);
 	parse->map.map[y] = (char *)malloc(sizeof(char) * (parse->map.width + 1));
 	if (!parse->map.map[y])
@@ -47,12 +46,11 @@ void	mkmap(t_parse *parse, int y)
 
 void	set_map(char *trigger_line, t_parse *parse)
 {
-	uint	idx;
+	t_uint	idx;
 
 	idx = -1;
 	parse->map.width = ft_strlen(trigger_line);
 	parse->map.height = 1;
-	//parse->map.is_parsed = true;
 	mkmap(parse, 1);
 	if (!parse->map.map)
 		exit_msg("Memory Error");

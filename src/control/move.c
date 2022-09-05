@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:16:45 by youngpar          #+#    #+#             */
-/*   Updated: 2022/08/23 17:16:47 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 22:22:16 by ykm1256          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,37 +22,43 @@ bool	is_wall(t_cub *cub, int nx, int ny)
 	return (cub->parse.map.map[(int)ny][(int)nx] == '1');
 }
 
+static	void	cal_n(double *nx, double *ny, t_cub *cub)
+{
+	double	mx;
+	double	my;
+
+	mx = cos(cub->user.radian) * (ROTANGLE) * SPEED;
+	my = sin(cub->user.radian) * (ROTANGLE) * SPEED;
+	if (cub->key.w)
+	{
+		*ny += my;
+		*nx += mx;
+	}
+	if (cub->key.s)
+	{
+		*ny -= my;
+		*nx -= mx;
+	}
+	if (cub->key.a)
+	{
+		*ny -= mx;
+		*nx += my;
+	}
+	if (cub->key.d)
+	{
+		*ny += mx;
+		*nx -= my;
+	}
+}
+
 void	move(t_cub *cub)
 {
 	double	nx;
 	double	ny;
-	double	mx;
-	double	my;
 
 	nx = cub->user.x;
-	mx = cos(cub->user.radian) * (ROTANGLE) * SPEED;
 	ny = cub->user.y;
-	my = sin(cub->user.radian) * (ROTANGLE) * SPEED;
-	if (cub->key.w)
-	{
-		ny += my;
-		nx += mx;
-	}
-	if (cub->key.s)
-	{
-		ny -= my;
-		nx -= mx;
-	}
-	if (cub->key.a)
-	{
-		ny -= mx;
-		nx += my;
-	}
-	if (cub->key.d)
-	{
-		ny += mx;
-		nx -= my;
-	}
+	cal_n(&nx, &ny, cub);
 	if (!is_wall(cub, nx, ny))
 	{
 		cub->user.x = nx;

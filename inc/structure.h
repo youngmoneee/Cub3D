@@ -1,27 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structure.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/05 21:34:12 by kyoon             #+#    #+#             */
+/*   Updated: 2022/09/05 21:57:06 by kyoon            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTURE_H
 # define STRUCTURE_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <math.h>
-#include "../mlxdir/mlx.h"
+# include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <unistd.h>
+# include <stdbool.h>
+# include <math.h>
+# include "../mlxdir/mlx.h"
 
 /*
  *	SHORT TYPE NAME
  */
 
-typedef unsigned int	uint;
-typedef unsigned char	uchar;
+typedef unsigned int	t_uint;
+typedef unsigned char	t_uchar;
 
 /*
  *	KIND OF OPTION
  */
 
-typedef enum			e_options
+typedef enum e_options
 {
 	FLOOR,
 	CEIL,
@@ -43,7 +55,6 @@ typedef struct s_img
 	int		lsz;
 	int		bpp;
 	int		endian;
-	//double	aspect;
 }	t_img;
 
 /*
@@ -87,12 +98,12 @@ typedef struct s_parse
 
 typedef struct s_user
 {
-	double	x;
-	double	y;
-	double	radian;
+	double		x;
+	double		y;
+	double		radian;
 	bool		is_parsed;
 	bool		is_valided;
-} t_user;
+}	t_user;
 typedef struct s_key
 {
 	bool	w;
@@ -123,10 +134,6 @@ typedef struct s_pos
 typedef struct s_ray
 {
 	double	angle;
-	/*
-	 *	0 : Horizon, DY
-	 *	1 : vertical, DX
-	 */
 	double	start[2][2];
 	double	step[2][2];
 	double	end[2][2];
@@ -135,7 +142,7 @@ typedef struct s_ray
 	double	e[2];
 	double	d;
 	double	offset[2];
-	int 	face;
+	int		face;
 	bool	hit;
 }	t_ray;
 #endif

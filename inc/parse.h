@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/05 21:33:21 by kyoon             #+#    #+#             */
+/*   Updated: 2022/09/05 21:33:32 by kyoon            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PARSE_H
 # define PARSE_H
 
-#include "structure.h"
+# include "structure.h"
 
 bool	all_parsed(t_parse *parse);
 bool	all_valid(t_parse *parse);

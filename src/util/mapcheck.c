@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 05:00:35 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/04 03:25:21 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:25:31 by ykm1256          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include "../../libft/libft.h"
 
-static int **init_offset(void)
+static int	**init_offset(void)
 {
 	int	**offset;
 	int	i;
@@ -51,8 +51,8 @@ static int	free_offset(int **offset)
 
 static void	free_chk(int **chk, t_map map)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (chk)
 	{
@@ -75,8 +75,8 @@ static int	dfs(int i, int j, t_map map, int ***chk)
 	{
 		di = i + offset[idx][0];
 		dj = j + offset[idx][1];
-		if (0 <= di && di < map.height && 0 <= dj &&
-				dj < map.width && map.map[di][dj] != '1' && !((*chk)[di][dj]))
+		if (0 <= di && di < map.height && 0 <= dj && dj < map.width
+			&& map.map[di][dj] != '1' && !((*chk)[di][dj]))
 		{
 			if (map.map[di][dj] == ' ' || di == 0 || dj == 0
 					|| di == map.height - 1 || dj == map.width - 1)
@@ -97,7 +97,7 @@ int	mapcheck(t_map map)
 	int		i;
 	int		j;
 	int		ret;
-	int	offset[4][2];
+	int		offset[4][2];
 
 	i = 0;
 	ret = 1;

@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:42 by youngpar          #+#    #+#             */
-/*   Updated: 2022/08/23 17:17:43 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:02:17 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	draw_minimap(t_cub *cub, int x, int y)
 	if (dist >= (MMAP_SZ / 2 - 1) && dist < (MMAP_SZ / 2))
 		draw_pixel(PAD_X + x, PAD_Y + y, GRID, &cub->mlx.img);
 	else if (dist <= 2)
-		draw_pixel(PAD_X + x, PAD_Y + y, PLAYER, &cub->mlx.img);			
+		draw_pixel(PAD_X + x, PAD_Y + y, PLAYER, &cub->mlx.img);
 	else if (!(x % (MMAP_SZ / N_TILE) && (y % (MMAP_SZ / N_TILE))))
 		draw_pixel(PAD_X + x, PAD_Y + y, GRID, &cub->mlx.img);
 	else
@@ -33,17 +33,18 @@ static bool	draw_minimap(t_cub *cub, int x, int y)
 
 void	draw_mmap(t_cub *cub)
 {
-	int i;
-	int j;
-	int cx;
-	int cy;
+	int	i;
+	int	j;
+	int	cx;
+	int	cy;
 
 	i = -MMAP_SZ / 2 - 1;
 	while (++i <= MMAP_SZ / 2)
 	{
 		j = -MMAP_SZ / 2 - 1;
 		while (++j <= MMAP_SZ / 2)
-		{	if (draw_minimap(cub, j, i))
+		{
+			if (draw_minimap(cub, j, i))
 				continue ;
 			cx = (int)(cub->user.x + (j * N_TILE / (double)MMAP_SZ));
 			cy = (int)(cub->user.y + (i * N_TILE / (double)MMAP_SZ));

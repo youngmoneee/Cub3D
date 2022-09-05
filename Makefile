@@ -20,7 +20,9 @@ MODEL	= parse_1.c \
 			init.c
 VIEW	= render.c \
 			minimap.c \
-			ray.c
+			ray.c \
+			ray_util.c \
+			ray_check.c
 CONTROL = move.c \
 			key_handler.c
 UTIL	= basic_util.c \

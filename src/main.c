@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 21:25:59 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/02 06:32:24 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/05 22:13:39 by ykm1256          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 static int	update(t_cub *cub)
 {
 	rotate(cub);
-    move(cub);
-    render(cub);
+	move(cub);
+	render(cub);
 	return (0);
 }
 
-int main(int a, char **v) {
+int	main(int a, char **v)
+{
 	t_cub	cub;
 
 	if (a != 2)
 		exit(1);
-	//	INITIALIZATION
 	init(&cub, v[1]);
 	if (!init_win(&cub.mlx))
 		exit_msg("Window Init Failed.");
@@ -41,7 +41,6 @@ int main(int a, char **v) {
 		printf("MAP NO!!!!!\n");
 		return (0);
 	}
-
 	int i = -1;
 	while (++i < 6)
 		printf("%d ) Parsed : %d, Valid : %d\n", i, cub.parse.opt[i].parsed, cub.parse.opt[i].valided);
@@ -60,10 +59,9 @@ int main(int a, char **v) {
 	}
 	printf("Player's Position\nX : %f\nY : %f\nASP : %f\n", cub.user.x, cub.user.y, cub.user.radian);
 
-	// VIEW
 	render(&cub);
 	mlx_hook(cub.mlx.pwin, X_KEY_PRESS, 0, key_press, &cub);
-    mlx_hook(cub.mlx.pwin, X_KEY_REALEASE, 0, key_release, &cub);
+	mlx_hook(cub.mlx.pwin, X_KEY_REALEASE, 0, key_release, &cub);
 	mlx_hook(cub.mlx.pwin, RED_DOT, 0, close_mlx, &cub.mlx);
 	mlx_loop_hook(cub.mlx.pmlx, update, &cub);
 	mlx_loop(cub.mlx.pmlx);

@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:27 by youngpar          #+#    #+#             */
-/*   Updated: 2022/08/23 17:17:28 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 22:24:04 by ykm1256          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@
 double	normalize(double angle)
 {
 	angle = remainder(angle, M_PI * 2);
-	return (angle < 0 ? M_PI * 2 + angle : angle);
+	if (angle < 0)
+		return (M_PI * 2 + angle);
+	else
+		return (angle);
 }
 
 char	*gnl(int fd, int idx)

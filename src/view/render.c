@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:49 by youngpar          #+#    #+#             */
-/*   Updated: 2022/08/23 17:17:50 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:44:10 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../libft/libft.h"
 #include <math.h>
 
-int		close_mlx(t_mlx *mlx)
+int	close_mlx(t_mlx *mlx)
 {
 	if (mlx)
 	{
@@ -34,8 +34,8 @@ void	draw_pixel(int x, int y, unsigned color, t_img *img)
 
 void	draw_bg(t_cub *cub)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < WIN_HEIGHT / 2)
@@ -57,49 +57,56 @@ void	draw_bg(t_cub *cub)
 	}
 }
 
-void	draw_ray(t_cub *cub, t_ray *ray)
+static void	draw_ray_sub(t_cub *cub, t_ray *ray, double ex, double ey)
 {
 	double	sx;
 	double	sy;
-	double	ex;
-	double	ey;
+	int		i;
 	double	ofsx;
 	double	ofsy;
-	double	longe;
 
 	sx = 0;
 	sy = 0;
-	ex = (ray->e[DX] - cub->user.x) * MMAP_SZ / N_TILE;
-	ey = (ray->e[DY] - cub->user.y) * MMAP_SZ / N_TILE;
-	longe = (fabs(ex) >= fabs(ey) ? fabs(ex) : fabs(ey));
-
+	i = -1;
 	ofsx = ex / ray->d * N_TILE / MMAP_SZ;
 	ofsy = ey / ray->d * N_TILE / MMAP_SZ;
-	int i = -1;
-	
-	while (++i < ray->d * MMAP_SZ / N_TILE && fabs(sqrt((sx * sx) + (sy * sy)) - MMAP_SZ / 2) > 1) {
+	while (++i < ray->d * MMAP_SZ / N_TILE
+		&& fabs(sqrt((sx * sx) + (sy * sy)) - MMAP_SZ / 2) > 1)
+	{
 		draw_pixel(PAD_X + sx, PAD_Y + sy, 0, &cub->mlx.img);
 		sx += ofsx;
 		sy += ofsy;
 	}
 }
 
+void	draw_ray(t_cub *cub, t_ray *ray)
+{
+	double	ex;
+	double	ey;
+
+	ex = (ray->e[DX] - cub->user.x) * MMAP_SZ / N_TILE;
+	ey = (ray->e[DY] - cub->user.y) * MMAP_SZ / N_TILE;
+}
+
 void	draw_wall(t_cub *cub, t_ray *ray, int i)
 {
-	int	idx;
-	int h = WIN_HEIGHT / 2 / ray->d / cos((i - WIN_WIDTH / 2) * FOV / WIN_WIDTH) * WIN_WIDTH / WIN_HEIGHT;
-	int top = WIN_HEIGHT / 2 - h / 2;
-	int bottom = WIN_HEIGHT / 2 + h / 2;
-	top = top < 0 ? 0 : top;
-	bottom = bottom >= WIN_HEIGHT ? WIN_HEIGHT : bottom;
-
-	//int	texoffsetx = ray->hit == VERT ? (int)ray->e[DY] : (int)ray->e[DX];
-	double texoffx;
+	int			idx;
+	int			h;
+	int			top;
+	int			bottom;
+	double		texoffx;
 	t_img		*img;
 	t_option	*opt;
-	uint	color;
+	t_uint		color;
 
-
+	h = WIN_HEIGHT / 2 / ray->d / cos((i - WIN_WIDTH / 2)
+			* FOV / WIN_WIDTH) * WIN_WIDTH / WIN_HEIGHT;
+	top = WIN_HEIGHT / 2 - h / 2;
+	if (top < 0)
+		top = 0;
+	bottom = WIN_HEIGHT / 2 + h / 2;
+	if (bottom >= WIN_HEIGHT)
+		bottom = WIN_HEIGHT;
 	if (ray->face == NORTH)
 		texoffx = 1 - fmod(ray->e[DX], 1);
 	else if (ray->face == SOUTH)
@@ -108,7 +115,6 @@ void	draw_wall(t_cub *cub, t_ray *ray, int i)
 		texoffx = 1 - fmod(ray->e[DY], 1);
 	else if (ray->face == EAST)
 		texoffx = fmod(ray->e[DY], 1);
-	//	TODO
 	opt = &cub->parse.opt[ray->face];
 	img = &opt->img;
 	int tex_width = opt->width;
@@ -119,11 +125,7 @@ void	draw_wall(t_cub *cub, t_ray *ray, int i)
 		int dy = idx + (h / 2) - WIN_HEIGHT / 2;
 		int texoffsety = dy * ((double)tex_height / h);
 		int texoffsetx = texoffx * tex_width;
-		color = *(uint *)(img->data + (texoffsetx * img->bpp / 8) + texoffsety * img->lsz);
-		//if (ray->face == NORTH) color = 0xFF0000;
-		//else if (ray->face == SOUTH) color = 0xFFFF00;
-		//else if (ray->face == WEST) color = 0x0000FF;
-		//else if (ray->face == EAST) color = 0xFF00FF;
+		color = *(t_uint *)(img->data + (texoffsetx * img->bpp / 8) + texoffsety * img->lsz);
 		draw_pixel(i, idx, color, &cub->mlx.img);
 	}
 }

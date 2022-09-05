@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/05/28 21:45:36 by youngpar         ###   ########.fr       */
+/*   Updated: 2022/09/05 23:32:36 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static void	set_aspect(int i, int j, char *c, t_user *user)
 
 void	set_user(t_map *map, t_user *user)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (++i < map->height)
