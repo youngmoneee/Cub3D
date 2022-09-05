@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 22:07:50 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/05 23:05:00 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/06 02:14:44 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,10 @@ int	raycast(t_cub *cub)
 		shoot(cub, &ray[i], i);
 		draw_wall(cub, &ray[i], i);
 	}
+	draw_mmap(cub);
+	i = -1;
+	while (++i < WIN_WIDTH)
+		if (i % 32 == 0)
+			draw_ray(cub, &ray[i]);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 21:34:12 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/05 21:57:06 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/06 01:30:29 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,4 +145,13 @@ typedef struct s_ray
 	int		face;
 	bool	hit;
 }	t_ray;
+
+typedef struct s_draw
+{
+	int	h;
+	int	i;
+	int	top;
+	int	bottom;
+	double	texoffx;
+}	t_draw;
 #endif

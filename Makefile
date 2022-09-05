@@ -19,6 +19,7 @@ MODEL	= parse_1.c \
 			parse_user.c \
 			init.c
 VIEW	= render.c \
+		  render_util.c \
 			minimap.c \
 			ray.c \
 			ray_util.c \

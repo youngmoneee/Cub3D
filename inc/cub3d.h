@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 00:42:45 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/06 00:59:44 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/06 02:04:44 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@
 # define VERT       1
 
 //	1024 * 768
-# define WIN_WIDTH	1080
-# define WIN_HEIGHT	920
+# define WIN_WIDTH	640
+# define WIN_HEIGHT	480
 
 # define BOX_SZ     WIN_HEIGHT
 
@@ -77,6 +77,7 @@
 # define SPEED      0.8
 # define ROTANGLE   0.0174532888
 # define ROTSPEED	0.0174532888
+# define FOV		1.0471973333
 
 /*
  * Init
