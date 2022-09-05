@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: kyoon <kyoon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/05 21:26:49 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/05 21:56:25 by ykm1256          ###   ########.fr       */
+/*   Created: 2022/09/06 00:42:45 by kyoon             #+#    #+#             */
+/*   Updated: 2022/09/06 00:59:44 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define RED_DOT	0x11
 
 # define ASP_S		1.570796
-# define ASP_N 		4.712388
+# define ASP_N		4.712388
 # define ASP_W		3.141592
 # define ASP_E		0
 
@@ -75,9 +75,8 @@
  *  Player
  */
 # define SPEED      0.8
-# define ROTANGLE	565.48656
-# define ROTSPEED 565.48656
-# define FOV 33929.1936
+# define ROTANGLE   0.0174532888
+# define ROTSPEED	0.0174532888
 
 /*
  * Init
