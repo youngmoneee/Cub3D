@@ -1,5 +1,5 @@
-F 0, 255, 255
-C 0, 255, 0
+F 64, 64, 64
+C 96, 96, 96
 
 NO           ./resource/north_test.xpm
 SO    ./resource/south_test.xpm

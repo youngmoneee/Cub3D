@@ -41,8 +41,8 @@
 # define VERT       1
 
 //	1024 * 768
-# define WIN_WIDTH	1080
-# define WIN_HEIGHT	920
+# define WIN_WIDTH	640
+# define WIN_HEIGHT	480
 
 # define BOX_SZ     WIN_HEIGHT
 
