@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 21:25:59 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/06 03:09:44 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/13 11:27:56 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,15 @@ int	main(int a, char **v)
 	if (!init_win(&cub.mlx))
 		exit_msg("Window Init Failed.");
 	cub.parse.mlx = cub.mlx.pmlx;
-
-	int i = -1;
 	parsing(&cub.parse);
 	set_user(&cub.parse.map, &cub.user);
-	if (mapcheck(cub.parse.map))
-		printf("MAP OK!!!!!\n");
-	else
-	{
-		printf("MAP NO!!!!!\n");
-		return (0);
-	}
-	i = -1;
-	while (++i < 6)
-		printf("%d ) Parsed : %d, Valid : %d\n", i, cub.parse.opt[i].parsed, cub.parse.opt[i].valided);
-	printf("Parsed : %d, Valid : %d\n", cub.parse.is_parsed, cub.parse.is_valided);
-	if (cub.parse.opt[FLOOR].parsed && cub.parse.opt[FLOOR].valided)
-		printf("floor : %X\n", cub.parse.opt[FLOOR].color);
-	if (cub.parse.opt[CEIL].parsed && cub.parse.opt[CEIL].valided)
-		printf("ceil : %X\n", cub.parse.opt[CEIL].color);
-	i = -1;
-	while (++i < cub.parse.map.height)
-	{
-		int j = -1;
-		while(++j < cub.parse.map.width)
-			printf("[%c]", cub.parse.map.map[i][j]);
-		printf("\n");
-	}
-	printf("Player's Position\nX : %f\nY : %f\nASP : %f\n", cub.user.x, cub.user.y, cub.user.radian);
-
+	if (!mapcheck(cub.parse.map))
+		exit_msg("Map Error!\n");
 	render(&cub);
 	mlx_hook(cub.mlx.pwin, X_KEY_PRESS, 0, key_press, &cub);
 	mlx_hook(cub.mlx.pwin, X_KEY_REALEASE, 0, key_release, &cub);
 	mlx_hook(cub.mlx.pwin, RED_DOT, 0, close_mlx, &cub.mlx);
 	mlx_loop_hook(cub.mlx.pmlx, update, &cub);
 	mlx_loop(cub.mlx.pmlx);
-	return 0;
+	return (0);
 }
