@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/20 13:53:04 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 15:00:39 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	set_color(char *line, t_option *opt)
 	else if (!ft_strncmp(line, "F ", 2))
 		op = &opt[FLOOR];
 	else
-		exit_msg("ERROR!!!!!!!!");
+		exit(1);
 	if (op->parsed)
 	{
 		op->valided = false;
@@ -74,6 +74,21 @@ void	set_color(char *line, t_option *opt)
 		return ;
 	}
 	atocolor(line, 16, op);
+}
+
+static	void chk_file(t_option *opt, char *route, t_uint idx, void *mlx)
+{
+	int	fd;
+
+	fd = open(route, O_RDONLY);
+	if (fd < 0)
+		return ;
+	close(fd);
+	opt[idx].parsed = true;
+	opt[idx].img.ptr = mlx_xpm_file_to_image(mlx, route,
+			&opt[idx].width, &opt[idx].height);
+	opt[idx].img.data = mlx_get_data_addr(opt[idx].img.ptr,
+			&opt[idx].img.bpp, &opt[idx].img.lsz, &opt[idx].img.endian);
 }
 
 void	set_path(char *line, t_option *opt, void *mlx)
@@ -91,11 +106,7 @@ void	set_path(char *line, t_option *opt, void *mlx)
 	idx = set_opt(arg[0]);
 	if (opt[idx].parsed)
 		exit_msg("Redefined Resource Path");
-	opt[idx].parsed = true;
-	opt[idx].img.ptr = mlx_xpm_file_to_image(mlx, arg[1],
-			&opt[idx].width, &opt[idx].height);
-	opt[idx].img.data = mlx_get_data_addr(opt[idx].img.ptr,
-			&opt[idx].img.bpp, &opt[idx].img.lsz, &opt[idx].img.endian);
+	chk_file(opt, arg[1], idx, mlx);
 	sz = -1;
 	while (arg[++sz])
 		free(arg[sz]);

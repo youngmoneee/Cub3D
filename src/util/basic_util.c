@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:27 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/05 22:24:04 by ykm1256          ###   ########.fr       */
+/*   Updated: 2022/09/20 14:15:33 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	*gnl(int fd, int idx)
 
 void	exit_msg(const char *msg)
 {
-	perror(msg);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
 	exit(1);
 }

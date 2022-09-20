@@ -6,13 +6,14 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/06 03:45:46 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 14:46:54 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../libft/libft.h"
 #include "../../inc/util.h"
 #include "../../inc/cub3d.h"
+#include <stdio.h>
 
 static bool	end_check(t_parse *parse)
 {
@@ -58,14 +59,19 @@ void	parsing(t_parse *parse)
 	while (!parse->is_parsed)
 	{
 		line = gnl(parse->fd, 0);
+		if (!*line)
+		{
+			free(line);
+			break ;
+		}
 		freer = line;
 		while (*line && ft_isspace(*line))
 			line++;
-		if (ft_strchr("FC", *line))
+		if (*line && ft_strchr("FC", *line))
 			set_color(line, parse->opt);
-		else if (ft_strchr("NEWS", *line))
+		else if (*line && ft_strchr("NEWS", *line))
 			set_path(line, parse->opt, parse->mlx);
-		else if (ft_strchr("10", *line))
+		else if (*line && ft_strchr("10", *line))
 		{
 			set_map(freer, parse);
 			parse->map.is_parsed = true;

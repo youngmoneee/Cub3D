@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 05:00:35 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/05 22:25:31 by ykm1256          ###   ########.fr       */
+/*   Updated: 2022/09/20 14:45:26 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ int	mapcheck(t_map map)
 	int		ret;
 	int		offset[4][2];
 
+	if (!map.map)
+		return (0);
 	i = 0;
 	ret = 1;
 	chk = calloc(sizeof(int *), map.height + 1);
