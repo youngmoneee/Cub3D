@@ -43,9 +43,6 @@ OBJS	= $(SRCS:.c=.o)
 
 all	:	$(NAME)
 
-debug:	$(OBJS) $(LIBFT) $(MLX)
-	$(CC) -g -fsanitize=address $(CFLAGS) $(OBJS) -I $(INC) -L. -l$(MLX) -l$(LIBFT) $(FRMWRK) -o $(NAME)
-
 $(NAME)	: $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS) -I $(INC) -L. -l$(MLX) -l$(LIBFT) $(FRMWRK) -o $(NAME)
 
@@ -63,7 +60,10 @@ clean	:
 	@$(MAKE) clean -C $(LIBDIR)
 
 fclean	: clean
-	rm -rf $(NAME)
+	@$(MAKE) fclean -C $(LIBDIR)
+	@rm -rf $(NAME)
+	@rm -rf libft.a
+	@rm -rf libmlx.dylib
 
 re		: fclean all
 
