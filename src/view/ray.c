@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 22:07:50 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/06 02:14:44 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 20:18:07 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	wall_dir(t_ray *ray)
 	return (NORTH);
 }
 
-static void	shoot(t_cub *cub, t_ray *ray, int col)
+static void	shoot(t_cub *cub, t_ray *ray)
 {
 	horizon_check(cub, ray);
 	vertical_check(cub, ray);
@@ -65,7 +65,7 @@ int	raycast(t_cub *cub)
 	{
 		ray[i].angle = cub->user.radian + (i - WIN_WIDTH / 2) * FOV / WIN_WIDTH;
 		ray[i].angle = normalize(ray[i].angle);
-		shoot(cub, &ray[i], i);
+		shoot(cub, &ray[i]);
 		draw_wall(cub, &ray[i], i);
 	}
 	draw_mmap(cub);

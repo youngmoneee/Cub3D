@@ -6,7 +6,7 @@
 /*   By: kyoon <kyoon@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 00:42:45 by kyoon             #+#    #+#             */
-/*   Updated: 2022/09/06 02:04:44 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 19:38:22 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "parse.h"
 # include "render.h"
 # include "handler.h"
+# include "util.h"
 
 # define _USE_MATH_DEFINES
 /*

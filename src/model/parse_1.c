@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/20 14:46:54 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 20:10:28 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,21 @@
 static bool	end_check(t_parse *parse)
 {
 	char	buf;
+	int		idx;
 
 	while (read(parse->fd, &buf, 1) > 0)
 	{
 		if (buf && !ft_isspace(buf))
 			return (false);
 	}
+	idx = -1;
+	while (++idx < 6)
+		if (!(parse->opt[idx].valided && parse->opt[idx].parsed))
+			return (false);
 	return (true);
 }
 
-bool	all_parsed(t_parse *parse)
-{
-	t_uint	i;
-	bool	ret;
-
-	i = -1;
-	ret = true;
-	while (++i)
-		ret &= parse->opt[i].parsed;
-	return (ret);
-}
-
-bool	all_valid(t_parse *parse)
-{
-	t_uint	i;
-	bool	ret;
-
-	i = -1;
-	ret = true;
-	while (++i)
-		ret &= parse->opt[i].parsed;
-	return (ret);
-}
-
-void	parsing(t_parse *parse)
+static	void	parsing_sub(t_parse *parse)
 {
 	char	*line;
 	char	*freer;
@@ -65,7 +46,7 @@ void	parsing(t_parse *parse)
 			break ;
 		}
 		freer = line;
-		while (*line && ft_isspace(*line))
+		while (ft_isspace(*line))
 			line++;
 		if (*line && ft_strchr("FC", *line))
 			set_color(line, parse->opt);
@@ -78,6 +59,13 @@ void	parsing(t_parse *parse)
 		}
 		free(freer);
 	}
+}
+
+void	parsing(t_parse *parse)
+{
+	parsing_sub(parse);
 	parse->is_valided = end_check(parse);
 	close(parse->fd);
+	if (!parse->is_valided)
+		exit_msg("Parse Error!");
 }

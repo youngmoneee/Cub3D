@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 21:25:59 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/20 14:42:51 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 19:22:57 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int a, char **v)
 	cub.parse.mlx = cub.mlx.pmlx;
 	parsing(&cub.parse);
 	set_user(&cub.parse.map, &cub.user);
-	if (!mapcheck(cub.parse.map))
-		exit_msg("Map Error!\n");
+	if (!(cub.parse.map.map) || !mapcheck(cub.parse.map))
+		exit_msg("Map Error!");
 	write(1, "success!!\n", 10);
 	render(&cub);
 	mlx_hook(cub.mlx.pwin, X_KEY_PRESS, 0, key_press, &cub);

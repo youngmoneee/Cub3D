@@ -6,7 +6,7 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:27 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/20 14:15:33 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 18:47:56 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ char	*gnl(int fd, int idx)
 	int		is_read;
 
 	is_read = read(fd, &buf, 1);
-	if (is_read == 0 || buf == '\n')
+	if (buf == '\n' && idx == 0)
+		ret = ft_calloc(sizeof(char), 2);
+	else if (is_read == 0 || buf == '\n')
 	{
 		ret = (char *) malloc(sizeof(char) * (idx + 1));
 		buf = 0;

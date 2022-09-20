@@ -6,35 +6,13 @@
 /*   By: youngpar <youngpar@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:17:49 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/06 02:11:31 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 20:17:39 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 #include "../../libft/libft.h"
 #include <math.h>
-
-static void	draw_ray_sub(t_cub *cub, t_ray *ray, double ex, double ey)
-{
-	double	sx;
-	double	sy;
-	int		i;
-	double	ofsx;
-	double	ofsy;
-
-	sx = 0;
-	sy = 0;
-	i = -1;
-	ofsx = ex / ray->d * N_TILE / MMAP_SZ;
-	ofsy = ey / ray->d * N_TILE / MMAP_SZ;
-	while (++i < ray->d * MMAP_SZ / N_TILE
-		&& fabs(sqrt((sx * sx) + (sy * sy)) - MMAP_SZ / 2) > 1)
-	{
-		draw_pixel(PAD_X + sx, PAD_Y + sy, 0, &cub->mlx.img);
-		sx += ofsx;
-		sy += ofsy;
-	}
-}
 
 void	draw_ray(t_cub *cub, t_ray *ray)
 {

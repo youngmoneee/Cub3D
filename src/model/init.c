@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/05 23:28:37 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 20:17:05 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 void	init(t_cub *cub, char *fname)
 {
-	t_uint	idx;
 	t_parse	*parse;
 
 	ft_memset(cub, 0, sizeof(t_cub));

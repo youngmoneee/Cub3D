@@ -1,9 +1,8 @@
 NAME	= cub3d
-CC		= arch -x86_64 cc
-CFLAGS	= #-Wall -Wextra -Werror
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
 
 FRMWRK	= -framework Opengl -framework Appkit
-#FRMWRK = -framework Metal -framework Metalkit
 MLX		= mlx
 MLXDIR	= mlxdir
 LIBFT	= ft
@@ -27,7 +26,8 @@ VIEW	= render.c \
 CONTROL = move.c \
 			key_handler.c
 UTIL	= basic_util.c \
-		  mapcheck.c
+		  mapcheck.c \
+		  dfs.c
 
 SRCF	= main.c \
 		  $(addprefix model/, $(MODEL)) \
@@ -44,23 +44,23 @@ OBJS	= $(SRCS:.c=.o)
 all	:	$(NAME)
 
 debug:	$(OBJS) $(LIBFT) $(MLX)
-	$(CC) -g $(CFLAGS) $(OBJS) -I $(INC) -L. -l$(MLX) -l$(LIBFT) $(FRMWRK) -o $(NAME)
+	$(CC) -g -fsanitize=address $(CFLAGS) $(OBJS) -I $(INC) -L. -l$(MLX) -l$(LIBFT) $(FRMWRK) -o $(NAME)
 
 $(NAME)	: $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) $(OBJS) -I $(INC) -L. -l$(MLX) -l$(LIBFT) $(FRMWRK) -o $(NAME)
 
 $(MLX)	:
-	#@$(MAKE) -C $(MLXDIR)
-	#cp $(MLXDIR)/libmlx.dylib ./
+	@$(MAKE) -C $(MLXDIR)
+	cp $(MLXDIR)/libmlx.dylib ./
 
 $(LIBFT):
-	#@$(MAKE) -C $(LIBDIR)
-	#cp $(LIBDIR)/libft.a ./
+	@$(MAKE) -C $(LIBDIR)
+	cp $(LIBDIR)/libft.a ./
 
 clean	:
 	rm -rf $(OBJS)
-	#@$(MAKE) clean -C $(MLXDIR)
-	#@$(MAKE) clean -C $(LIBDIR)
+	@$(MAKE) clean -C $(MLXDIR)
+	@$(MAKE) clean -C $(LIBDIR)
 
 fclean	: clean
 	rm -rf $(NAME)

@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/20 15:00:39 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 20:01:45 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,19 @@ void	set_color(char *line, t_option *opt)
 	atocolor(line, 16, op);
 }
 
-static	void chk_file(t_option *opt, char *route, t_uint idx, void *mlx)
+static	void	chk_file(t_option *opt, char *route, t_uint idx, void *mlx)
 {
 	int	fd;
 
 	fd = open(route, O_RDONLY);
 	if (fd < 0)
-		return ;
+		exit_msg("invalid file path");
 	close(fd);
 	opt[idx].parsed = true;
 	opt[idx].img.ptr = mlx_xpm_file_to_image(mlx, route,
 			&opt[idx].width, &opt[idx].height);
+	if (!opt[idx].img.ptr)
+		exit_msg("invalid xpm file");
 	opt[idx].img.data = mlx_get_data_addr(opt[idx].img.ptr,
 			&opt[idx].img.bpp, &opt[idx].img.lsz, &opt[idx].img.endian);
 }

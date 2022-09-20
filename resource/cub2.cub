@@ -1,4 +1,4 @@
-NO ./resource/no_tmp_path
+NO ./resource/no_tmp_path.xpm
 SO    ./resource/so_tmp_path
 EA ./resource/ea_tmp_path
 WE ./resource/we_tmp_path

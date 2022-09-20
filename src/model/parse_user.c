@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/05 23:32:36 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 20:20:15 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void	set_aspect(int i, int j, char *c, t_user *user)
 {
 	if (user->is_parsed)
-		user->is_valided = false;
+		exit_msg("player position redefine");
 	user->is_parsed = true;
 	user->x = j + 0.5;
 	user->y = i + 0.5;
@@ -47,6 +47,8 @@ void	set_user(t_map *map, t_user *user)
 				set_aspect(i, j, &map->map[i][j], user);
 		}
 	}
+	if (!user->is_parsed)
+		exit_msg("no player");
 }
 
 bool	check_boundary(t_cub *cub, int cx, int cy)
