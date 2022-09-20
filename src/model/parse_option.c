@@ -6,7 +6,7 @@
 /*   By: youngpar <youngseo321@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 20:33:09 by youngpar          #+#    #+#             */
-/*   Updated: 2022/09/06 03:42:40 by kyoon            ###   ########.fr       */
+/*   Updated: 2022/09/20 13:53:04 by kyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ void	set_color(char *line, t_option *opt)
 {
 	t_option	*op;
 
-	if (*line == 'C')
+	if (!ft_strncmp(line, "C ", 2))
 		op = &opt[CEIL];
-	else if (*line == 'F')
+	else if (!ft_strncmp(line, "F ", 2))
 		op = &opt[FLOOR];
 	else
-		return ;
+		exit_msg("ERROR!!!!!!!!");
 	if (op->parsed)
 	{
 		op->valided = false;
